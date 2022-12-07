@@ -1,0 +1,7 @@
+TOKEN=transfer-1670380785569
+MODE=api
+NETWORK=http://127.0.0.1:54320,http://127.0.0.1:54321,http://127.0.0.1:54322,http://127.0.0.1:54323
+ID=mitum
+N=10000
+DURATION=10
+node tools/test.js $TOKEN $MODE $NETWORK $ID $N $DURATION
