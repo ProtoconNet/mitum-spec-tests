@@ -49,7 +49,7 @@ export async function lookup({ token, network, mongo }) {
 	const rs = new Date(spl[0]).getTime();
 	config(`start time; ${rs}`);
 
-	const res = mongo ? await fdb(token) : await lu(token, network);
+	const res = mongo ? await fdb(token, mongo) : await lu(token, network);
 	try {
 		const latest = res
 			.filter((fact) => fact.inState)
@@ -128,7 +128,7 @@ async function lu(token, network) {
 
 async function fdb(token, mongo) {
 	const facts = readFileSync(
-		`logging/${token}/operations/transfers/facts.csv`,
+		`logging/${token}/facts.csv`,
 		{
 			encoding: "utf8",
 		}
@@ -143,11 +143,11 @@ async function fdb(token, mongo) {
 	const db = client.db(mongo.db);
 	const collection = db.collection("digest_op");
 
-	const luk = async (hash) => {
+	const luk = async (hash, idx) => {
 		return await collection
 			.find({ fact: hash })
 			.toArray()
-			.then((res, idx) => {
+			.then((res) => {
 				res = res[0];
 				success(`${idx}:: found; ${hash}`);
 				const r = {
