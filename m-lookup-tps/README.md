@@ -14,12 +14,12 @@ v18.9.0
 
 __installation__
 
-Before installation, install [mitum-sdkjs](https://github.com/ProtoconNet/mitum-sdkjs) first.
+Before installation, install [mitum-sdk-js](https://github.com/ProtoconNet/mitum-sdk-js) first.
 
 ```sh
-$ git clone https://github.com/ProtoconNet/mitum-sdkjs
+$ git clone https://github.com/ProtoconNet/mitum-sdk-js
 
-$ cd mitum-sdkjs
+$ cd mitum-sdk-js
 
 $ npm -i g
 ```
@@ -27,9 +27,9 @@ $ npm -i g
 Then, install __mitum-lookup-tps__.
 
 ```sh
-$ git clone https://github.com/ProtoconNet/mitum-lookup-tps
+$ git clone https://github.com/ProtoconNet/mitum-test
 
-$ cd mitum-lookup-tps
+$ cd mitum-test/m-lookup-tps
 
 $ npm i
 
