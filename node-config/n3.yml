@@ -1,0 +1,42 @@
+address: no3sas
+privatekey: 5mbVAof6ka4e2DZZXAvF4ybHhBBjsWTpfo8f6Aeazphmmpr
+# publickey: 2682nzsYEKe9sERNqnCVqERPbMsaAuAHR28RYG5MSoqQPmpu
+network_id: mitum
+network:
+  bind: 0.0.0.0:4320
+  publish: 172.31.53.150:4320
+  tls_insecure: true
+storage:
+  base: ./mitum-data
+  database: leveldb://
+digest:
+  network:
+    bind: http://0.0.0.0:54320
+    url: http://localhost:54320
+  database:
+    uri: mongodb://127.0.0.1:27017/mc
+
+sync_sources:
+  - type: sync-source-node
+    address: no0sas
+    publickey: jMiA8RMMi2stXXQBn2p98omsTbdXwuwowHGt5pZKto5Zmpu
+    publish: 172.31.62.194:4320
+    tls_insecure: true
+  - type: sync-source-node
+    address: no1sas
+    publickey: 2Ak2DMSw1zfCiqvYhrPTa65L6f4kwGd24sLJZA1h6qXt2mpu
+    publish: 172.31.50.40:4320
+    tls_insecure: true
+  - type: sync-source-node
+    address: no2sas
+    publickey: 23YZmDPBnrmC7tidVyuRV2Krvsc1M3unwTsYThzKGYwX3mpu
+    publish: 172.31.63.194:4320
+    tls_insecure: true
+
+parameters:
+  threshold: 67
+  interval_broadcast_ballot: 1s # 3s
+  wait_preparing_init_ballot: 1s # 5s
+  wait_preparing_next_round_init_ballot: 500ms # 1s
+  timeout_request_proposal: 500ms
+  max_operation_size: 5000000
