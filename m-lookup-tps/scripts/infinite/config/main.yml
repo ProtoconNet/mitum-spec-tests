@@ -1,0 +1,50 @@
+address: node0sas
+privatekey: L2iXhtcPbPFH9mThSynRzdGtJUw8t81BjZxoZVLafgJsP75Wmft3mpr
+storage:
+    database:
+        uri: mongodb://192.168.50.56/mc-jmeter
+    blockdata:
+        path: /mitum/data/blockfs
+network-id: mitum
+network:
+    bind: https://0.0.0.0:54321
+    url: https://192.168.50.55:54321
+    #url: https://node.test-dev.protocon.network:54321
+genesis-operations:
+    - type: genesis-currencies
+      account-keys:
+        keys:
+            - publickey: cnMJqt1Q7LXKqFAWprm6FBC7fRbWQeZhrymTavN11PKJmpu
+              # privatekey: L4qMcVKwQkqrnPPtEhj8idCQyvCN2zyG374i5oftGQfraJEP8iekmpr
+              weight: 100
+        threshold: 100
+      currencies:
+        - currency: PEN
+          new-account-min-balance: "10"
+          balance: "10000000000000000000000000000000000000000000"
+          feeer:
+            type: fixed
+            amount: 10
+            exchange-min-amount: 5
+
+policy:
+    threshold: 100
+    max-operations-in-seal: 10
+    max-operations-in-proposal: 10010
+    timeout-waiting-proposal: 5s
+    interval-broadcasting-init-ballot: INTERVAL_INIT_BALLOTms
+    interval-broadcasting-proposal: INTERVAL_PROPOSALms
+    wait-broadcasting-accept-ballot: WAIT_ACCEPT_BALLOTms
+    interval-broadcasting-accept-ballot: INTERVAL_ACCEPT_BALLOTms
+    timespan-valid-ballot: 1m0s
+    timeout-process-proposal: 10s
+
+suffrage:
+    nodes:
+        - node0sas
+
+nodes:
+digest:
+    network:
+        bind: http://0.0.0.0:80
+        url: http://127.0.0.1:80

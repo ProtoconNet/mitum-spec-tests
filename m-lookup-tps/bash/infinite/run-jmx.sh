@@ -1,0 +1,1 @@
+JVM_ARGS="-Xms8192m -Xmx8192m" jmeter -n -t logging-inf/TOKEN1/TOKEN2/Transfers.jmx -l logging-inf/TOKEN1/TOKEN2/result.jtl -j logging-inf/TOKEN1/TOKEN2/jmeter.log

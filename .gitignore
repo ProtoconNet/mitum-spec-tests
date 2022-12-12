@@ -1,1 +1,2 @@
-logging/*
+node_modules/**
+logging/**
