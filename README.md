@@ -10,6 +10,6 @@ Before the test, you must install jmeter and `beta` branch of [mitum-sdk-js](htt
 
 * m-test: What it does is totally same with m-lookup-test. However, you need to run each step of the process seperately.
 
-* lookup: This folder contains a jmeter script to test lookup-tps.
+* lookup: This folder contains a jmeter script to test lookup-tps. See details in [lookup/README.md](lookup/README.md).
 
 * node-config: This folder contains node-config files that can be used to run nodes for testing.
