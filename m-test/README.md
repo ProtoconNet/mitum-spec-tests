@@ -39,7 +39,7 @@ $ npm link mitum-sdk
 ## Run
 
 * v1: mitum1
-* v2: mitum2 (schnorr)
+* v2: mitum2
 
 ### create-account
 

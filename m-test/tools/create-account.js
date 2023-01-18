@@ -12,6 +12,8 @@ import {
 	TimeStamp,
 	Operation,
 	useId,
+	SIG_TYPE,
+	useSigType,
 } from "mitum-sdk";
 
 import fs from "fs-extra";
@@ -79,22 +81,32 @@ async function createAccount({
 	];
 
 	useId(id);
+	if (v === "v2") {
+		useSigType(SIG_TYPE.M2);
+	}
 
 	let phase = totalPhase() - 1;
 	let count = 0;
+
+    let base = 100000 * Math.pow(10, phase);
 	while (accounts.length <= n) {
 		log(`remain phase ${phase}`);
 		const accs = [];
-		for (let i = 0; i < accounts.length; i++) {
+		for (const acc of accounts) {
 			const items = [];
 			for (let j = 0; j < maxItems; j++) {
 				const amounts = [
 					new Amount(
 						cid,
-						new Big(100000 * (phase * maxItems + 1)).toString()
+						new Big(base * (phase * maxItems + 1)).toString()
 					),
 				];
-				const kp = KPGen.random();
+				const kp =
+					v === "v1"
+						? KPGen.random()
+						: v === "v2"
+						? KPGen.m2.random()
+						: null;
 				const keys = new Keys(
 					[new PubKey(kp.publicKey.toString(), 100)],
 					100
@@ -111,14 +123,11 @@ async function createAccount({
 
 			const fact = new Currency.CreateAccountsFact(
 				new TimeStamp().UTC(),
-				accounts[i].address,
+				acc.address,
 				items
 			);
 			const op = new Operation(fact, "", []);
-			if (v === "v2") {
-				op.forceExtendedMessage = true;
-			}
-			op.sign(accounts[i].private);
+			op.sign(acc.private);
 
 			const d = op.dict();
 			createAccounts.push(d);
@@ -159,6 +168,7 @@ async function createAccount({
 		console.log("wait...");
 		await wait(interval);
 		phase--;
+        base = parseInt(base / 10);
 	}
 
 	writeFileSync(

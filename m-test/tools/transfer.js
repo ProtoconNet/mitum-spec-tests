@@ -1,4 +1,12 @@
-import { Amount, Currency, Operation, TimeStamp, useId } from "mitum-sdk";
+import {
+	Amount,
+	Currency,
+	Operation,
+	SIG_TYPE,
+	TimeStamp,
+	useId,
+	useSigType,
+} from "mitum-sdk";
 import { log, warning } from "../log.js";
 
 import fs from "fs-extra";
@@ -37,7 +45,7 @@ export function transfer({ v, id, cid, genesis, n, accs }) {
 			...JSON.parse(readFileSync(accs, { encoding: "utf8" }))["accounts"],
 		];
 		if (accounts.length < n) {
-			throw "insufficient accounts";
+			throw new Error("insufficient accounts");
 		}
 		log(`get accounts...`);
 	} catch (e) {
@@ -46,8 +54,13 @@ export function transfer({ v, id, cid, genesis, n, accs }) {
 	}
 
 	useId(id);
+	if (v === "v2") {
+		useSigType(SIG_TYPE.M2);
+	}
 
-	log(`creating transfer operations in logging/transfer-${token}/operations/`);
+	log(
+		`creating transfer operations in logging/transfer-${token}/operations/`
+	);
 	const transfers = [];
 	for (let i = 0; i < n; i++) {
 		const fact = new Currency.TransfersFact(
@@ -56,9 +69,6 @@ export function transfer({ v, id, cid, genesis, n, accs }) {
 			[new Currency.TransfersItem(genesis, [new Amount(cid, "1")])]
 		);
 		const op = new Operation(fact, "", []);
-		if (v === "v2") {
-			op.forceExtendedMessage = true;
-		}
 		op.sign(accounts[i].private);
 		transfers.push(op.dict());
 	}

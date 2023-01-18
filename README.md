@@ -2,7 +2,7 @@
 
 This package had been developed to test tps and lookup-tps of mitum.
 
-Before the test, you must install jmeter and `beta` branch of [mitum-sdk-js](http://github.com/ProtoconNet/mitum-sdk-js).
+Before the test, you must install jmeter and the latest version of [mitum-sdk-js](http://github.com/ProtoconNet/mitum-sdk-js).
 
 ## Directories
 
