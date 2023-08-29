@@ -14,32 +14,36 @@ v18.9.0
 
 __installation__
 
-Before installation, install [mitum-sdk-js](https://github.com/ProtoconNet/mitum-sdk-js) first.
-
-```sh
-$ git clone https://github.com/ProtoconNet/mitum-sdk-js
-
-$ cd mitum-sdk-js
-
-$ npm -i g
-```
-
-Then, install __mitum-test__.
+Install __mitum-test__ first.
 
 ```sh
 $ git clone https://github.com/ProtoconNet/mitum-test-tps
 
-$ cd mitum-test/m-test
+$ cd mitum-test-tps/m-test
+
+$ npm i
+```
+
+Then locate [mitumjs](https://github.com/ProtoconNet/mitumjs) in mitum-spec-tests.
+
+```sh
+$ git clone https://github.com/ProtoconNet/mitumjs
+
+$ cp -r ./mitumjs ./mitum-spec-tests
+
+$ cd mitum-spec-tests/mitumjs
 
 $ npm i
 
-$ npm link mitum-sdk
+$ npm i tsc, typescript
+
+$ npm run build
 ```
 
 ## Run
 
 * v1: mitum1
-* v2: mitum2
+* v2: mitum2 (mitumjs support only v2)
 
 ### create-account
 
