@@ -188,7 +188,7 @@ export async function test({ token, id, n, mode, networks, duration }) {
 
 		files.forEach((f, idx) => {
 			execSync(
-				`./m network client '{"_hint":"send-operation-header-v0.0.1"}' '${id}' ${networks[pt]}#tls_insecure --body=logging/${token}/operations/${f}.json --log.level=fatal > logging/${token}/test-result/network-client-log/${f}.json 2>&1`
+				`./m network client send-operation '${id}' ${networks[pt]}#tls_insecure --body=logging/${token}/operations/${f}.json --log.level=fatal > logging/${token}/test-result/network-client-log/${f}.json 2>&1`
 			);
 			success(`${idx}:: ${d.fact.hash} sent by network-client`);
 		});

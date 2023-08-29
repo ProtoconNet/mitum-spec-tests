@@ -1,7 +1,7 @@
 V=v2
 ID=mitum
 CID=MCC
-GENESIS=2E5qNuz9HsXydeTTdG1a3SZtj1iBWNUyVyfHYNcs4gSgmca
-N=10000
-ACCOUNTS=logging/create-account-1670380667463/accounts.json
+GENESIS=5Lh3Q4tX2t7RVKWUa3HnKLZfXntH4kY7jwHqWsuFx81bmca
+N=10
+ACCOUNTS=logging/create-account-1693308437305/accounts.json
 node tools/transfer.js $V $ID $CID $GENESIS $N $ACCOUNTS
