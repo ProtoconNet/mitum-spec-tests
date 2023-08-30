@@ -14,32 +14,36 @@ v18.9.0
 
 __installation__
 
-Before installation, install [mitum-sdk-js](https://github.com/ProtoconNet/mitum-sdk-js) first.
+Install __mitum-lookup-tps__ first.
 
 ```sh
-$ git clone https://github.com/ProtoconNet/mitum-sdk-js
+$ git clone https://github.com/ProtoconNet/mitum-test-tps
 
-$ cd mitum-sdk-js
+$ cd mitum-test-tps/m-lookup-tps
 
-$ npm -i g
+$ npm i
 ```
 
-Then, install __mitum-lookup-tps__.
+Then locate [mitumjs](https://github.com/ProtoconNet/mitumjs) in mitum-spec-tests.
 
 ```sh
-$ git clone https://github.com/ProtoconNet/mitum-test
+$ git clone https://github.com/ProtoconNet/mitumjs
 
-$ cd mitum-test/m-lookup-tps
+$ cp -r ./mitumjs ./mitum-spec-tests
+
+$ cd mitum-spec-tests/mitumjs
 
 $ npm i
 
-$ npm link mitum-sdk
+$ npm i tsc, typescript
+
+$ npm run build
 ```
 
 ## Run
 
 * v1: mitum1
-* v2: mitum2 (schnorr)
+* v2: mitum2 (mitumjs support only v2)
 
 ### prepare
 
