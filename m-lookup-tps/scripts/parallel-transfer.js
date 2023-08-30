@@ -1,5 +1,5 @@
 import { log, config, info } from "../log.js";
-import { ParallelTransfer } from "../index.js";
+import { ParallelTransferM2 } from "../index.js";
 
 const argvs = process.argv.map((val) => val);
 const token = argvs[2];
@@ -8,7 +8,7 @@ const id = argvs[4];
 const url = argvs[5];
 
 const run = () => {
-    ParallelTransfer(token, exec, id, url);
+    ParallelTransferM2(token, exec, id, url);
     log("parallel done");
 };
 

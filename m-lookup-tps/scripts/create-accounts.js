@@ -1,4 +1,4 @@
-import { CreateAccountsAv } from "../index.js";
+import { CreateAccountsAvM2 } from "../index.js";
 import { log, info, config } from "../log.js";
 
 const argvs = process.argv.map((val) => val);
@@ -19,7 +19,7 @@ const maxItems = parseInt(argvs[10]);
 
 const run = async () => {
 	log(`run CreateAccountsAv`);
-	const _ = await CreateAccountsAv(v, token, {
+	const _ = await CreateAccountsAvM2(v, token, {
 		n,
 		network,
 		id,

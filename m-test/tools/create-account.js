@@ -138,7 +138,7 @@ async function createAccount({
 			const op = new Operation(fact, "", []);
 			op.sign(acc.private);
 
-			const d = op.dict();
+			const d = op.toHintedObject();
 			createAccounts.push(d);
 
 			writeFileSync(
@@ -264,7 +264,7 @@ async function createAccountM2({
 				);
 				accs.push({
 					address: keys.address.toString(),
-					private: kp.privateKey,
+					private: kp.privatekey,
 				});
 				items.push(new CreateAccountsItem(keys, amounts, "mitum"));
 				if (accounts.length + accs.length > n) {

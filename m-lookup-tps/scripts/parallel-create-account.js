@@ -1,4 +1,4 @@
-import { ParallelCreateAccounts } from "../index.js";
+import { ParallelCreateAccountsM2 } from "../index.js";
 import { log, config, info } from "../log.js";
 
 const argvs = process.argv.map((val) => val);
@@ -30,7 +30,7 @@ const options = {
 };
 
 const run = () => {
-	ParallelCreateAccounts(v, token, options);
+	ParallelCreateAccountsM2(v, token, options);
 };
 
 info("================================== parallel-create-account.js");

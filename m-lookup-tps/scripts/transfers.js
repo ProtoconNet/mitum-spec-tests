@@ -1,4 +1,4 @@
-import { Transfers } from "../index.js";
+import { TransfersM2 } from "../index.js";
 import { readFileSync } from "fs";
 import { info, log, config } from "../log.js";
 
@@ -16,7 +16,7 @@ const run = () => {
 	log(`get accounts from ${fp}`);
 
 	log(`run Transfer`);
-	const _ = Transfers(v, token, { n, id, address, cid, accounts });
+	const _ = TransfersM2(v, token, { n, id, address, cid, accounts });
 };
 
 info("================================== transfers.js");

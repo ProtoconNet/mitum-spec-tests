@@ -28,7 +28,7 @@ export const TransfersNoLog = (v, token, options) => {
 		}
 		op.sign(accounts[i].priv);
 
-		transfers.push(op.dict());
+		transfers.push(op.toHintedObject());
 	}
 
 	fsExtra.ensureDirSync(`logging-inf/${token[0]}/${token[1]}/operations/transfers/`);

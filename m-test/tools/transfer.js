@@ -75,11 +75,11 @@ export function transfer({ v, id, cid, genesis, n, accs }) {
 		const fact = new Currency.TransfersFact(
 			new TimeStamp().UTC(),
 			accounts[i].address,
-			[new Currency.TransfersItem(genesis, [new Amount(cid, "1")])]
+			[new TransfersItem(genesis, [new Amount(cid, "1")])]
 		);
-		const op = new Operation(fact, "", []);
+		const op = new OperationType(id, fact);
 		op.sign(accounts[i].private);
-		transfers.push(op.dict());
+		transfers.push(op.toHintedObject());
 	}
 
 	transfers.forEach((op, idx) =>
@@ -143,7 +143,7 @@ export function transferM2({ v, id, cid, genesis, n, accs }) {
 		);
 		const op = new OperationType(id, fact);
 		op.sign(accounts[i].private);
-		transfers.push(op.dict());
+		transfers.push(op.toHintedObject());
 	}
 
 	transfers.forEach((op, idx) =>
