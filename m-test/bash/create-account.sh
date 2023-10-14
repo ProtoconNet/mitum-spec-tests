@@ -1,10 +1,15 @@
-V="v2"
-MODE="api"
-NETWORK=http://127.0.0.1:54320
-ID=mitum
-CID=MCC
-MAX_ITEMS=10
-GENESIS="5Lh3Q4tX2t7RVKWUa3HnKLZfXntH4kY7jwHqWsuFx81bmca,5s3c35ZZsbnVFK6uKR9tdZ5dRiYXp9P8BRJ8eZMbCxWcmpr"
-N=100
-INTERVAL=30000
-node tools/create-account.js $V $MODE $NETWORK $ID $CID $MAX_ITEMS $GENESIS $N $INTERVAL
+# create accounts
+
+# mode =  api | network-client
+MODE=
+# api server url
+API=
+NETWORK_ID=
+CURRENCY_ID=
+MAX_ITEMS=
+GENESIS_ACCOUNT=
+ACCOUNTS_COUNT=
+# interval between phase
+INTERVAL=
+
+node tools/create-account.js $MODE $API $NETWORK_ID $CURRENCY_ID $MAX_ITEMS $GENESIS_ACCOUNT $ACCOUNTS_COUNT $INTERVAL

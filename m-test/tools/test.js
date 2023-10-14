@@ -1,14 +1,11 @@
 import { execSync } from "child_process";
 import { log } from "../log.js";
 import wait from "waait";
-
 import path from "path";
 import { fileURLToPath } from "url";
-
 import fs from "fs-extra";
 
 const { ensureDirSync, writeFileSync, readFileSync } = fs;
-
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 async function run() {
@@ -168,7 +165,7 @@ export async function test({ token, id, n, mode, networks, duration }) {
 		log(`logging/${token}/test-result/test.jmx created`);
 		writeFileSync(
 			`logging/${token}/test-result/bash.sh`,
-			`JVM_ARGS="-Xms14336m -Xmx14336m" jmeter -n -t logging/${token}/test-result/test.jmx -l logging/${token}/test-result/result.jtl -j logging/${token}/test-result/jmeter.log`
+			`JVM_ARGS="-Xms50g -Xmx50g" jmeter -n -t logging/${token}/test-result/test.jmx -l logging/${token}/test-result/result.jtl -j logging/${token}/test-result/jmeter.log`
 		);
 		log(`logging/${token}/test-result/bash.sh created`);
 		execSync(`bash logging/${token}/test-result/bash.sh`);

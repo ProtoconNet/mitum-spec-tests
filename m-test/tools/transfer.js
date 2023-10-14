@@ -1,19 +1,8 @@
-// import {
-// 	Amount,
-// 	Currency,
-// 	Operation,
-// 	SIG_TYPE,
-// 	TimeStamp,
-// 	useId,
-// 	useSigType,
-// } from "mitum-sdk";
-
 import { Mitum } from "../../mitumjs/cjs/index.js";
-import { TimeStamp } from "../../mitumjs/cjs/utils/time.js";
-import { Amount } from "../../mitumjs/cjs/types/property.js";
-import { TransfersItem, TransfersFact } from "../../mitumjs/cjs/currency/transfer.js";
-// import { Keys, PubKey } from "../../mitumjs/esm/account/publicKey.js"
-import { OperationType } from "../../mitumjs/cjs/types/operation.js"
+import { TimeStamp } from "../../mitumjs/cjs/types/time.js";
+import { Amount } from "../../mitumjs/cjs/common/amount.js";
+import { TransferItem, TransferFact } from "../../mitumjs/cjs/operation/currency/transfer.js";
+import { Operation } from "../../mitumjs/cjs/operation/base/operation.js"
 
 import { log, warning } from "../log.js";
 
@@ -23,126 +12,78 @@ const { ensureDirSync, readFileSync, writeFileSync } = fs;
 
 async function run() {
 	const argvs = process.argv.map((val) => val);
-	const v = argvs[2];
-	const id = argvs[3];
-	const cid = argvs[4];
-	const genesis = argvs[5];
-	const n = parseInt(argvs[6]);
-	const accs = argvs[7];
+	const id = argvs[2];
+	const cid = argvs[3];
+	const total = parseInt(argvs[4]);
+	const items = parseInt(argvs[5]);
+	const senders = argvs[6];
+	const receivers = argvs[7];
 	const arg = {
-		v,
 		id,
 		cid,
-		genesis,
-		n,
-		accs,
+		total,
+		items,
+		senders,
+		receivers,
 	};
-	// transfer(arg);
-	transferM2(arg);
+	createOperations(arg);
 }
 
 await run();
 
-export function transfer({ v, id, cid, genesis, n, accs }) {
+export function createOperations({ id, cid, total, items, senders, receivers }) {
 	const token = new Date().getTime();
 	ensureDirSync(`logging/transfer-${token}/operations/`);
 	log(`dir logging/transfer-${token}/operations/ created`);
+	const ops = total/items
 
-	let accounts = [];
+	let senderAccounts = [];
 	try {
-		accounts = [
-			...JSON.parse(readFileSync(accs, { encoding: "utf8" }))["accounts"],
+		senderAccounts = [
+			...JSON.parse(readFileSync(senders, { encoding: "utf8" }))["accounts"],
 		];
-		if (accounts.length < n) {
-			throw new Error("insufficient accounts");
+		if (senderAccounts.length < ops) {
+			throw new Error("insufficient senderAccounts");
 		}
-		log(`get accounts...`);
+		log(`get senderAccounts...`);
 	} catch (e) {
-		warning(`insufficient accounts or wrong file path`);
+		warning(`insufficient senderAccounts or wrong file path`);
 		process.exit(-1);
 	}
 
-	useId(id);
-	if (v === "v2") {
-		useSigType(SIG_TYPE.M2);
-	}
-
-	log(
-		`creating transfer operations in logging/transfer-${token}/operations/`
-	);
-	const transfers = [];
-	for (let i = 0; i < n; i++) {
-		const fact = new Currency.TransfersFact(
-			new TimeStamp().UTC(),
-			accounts[i].address,
-			[new TransfersItem(genesis, [new Amount(cid, "1")])]
-		);
-		const op = new OperationType(id, fact);
-		op.sign(accounts[i].private);
-		transfers.push(op.toHintedObject());
-	}
-
-	transfers.forEach((op, idx) =>
-		writeFileSync(
-			`logging/transfer-${token}/operations/${idx}-${op.fact.hash}.json`,
-			JSON.stringify(op, null, 4)
-		)
-	);
-	log(`transfer files created in logging/transfer-${token}/operations/`);
-
-	writeFileSync(
-		`logging/transfer-${token}/files.csv`,
-		transfers.map((op, idx) => `${idx}-${op.fact.hash}`).join("\n")
-	);
-	log(`logging/transfer-${token}/files.csv created`);
-	writeFileSync(
-		`logging/transfer-${token}/facts.csv`,
-		transfers.map((op) => op.fact.hash).join("\n")
-	);
-	log(`logging/transfer-${token}/facts.csv created`);
-}
-
-export function transferM2({ v, id, cid, genesis, n, accs }) {
-	const token = new Date().getTime();
-	ensureDirSync(`logging/transfer-${token}/operations/`);
-	log(`dir logging/transfer-${token}/operations/ created`);
-
-	let accounts = [];
+	let receiverAccounts = [];
 	try {
-		accounts = [
-			...JSON.parse(readFileSync(accs, { encoding: "utf8" }))["accounts"],
+		receiverAccounts = [
+			...JSON.parse(readFileSync(receivers, { encoding: "utf8" }))["accounts"],
 		];
-		if (accounts.length < n) {
-			throw new Error("insufficient accounts");
+		if (receiverAccounts.length < items) {
+			throw new Error("insufficient senderAccounts");
 		}
-		log(`get accounts...`);
+		log(`get receiverAccounts...`);
 	} catch (e) {
-		warning(`insufficient accounts or wrong file path`);
+		warning(`insufficient receiverAccounts or wrong file path`);
 		process.exit(-1);
 	}
 
-	// useId(id);
-	// if (v === "v2") {
-	// 	useSigType(SIG_TYPE.M2);
-	// }
 	const mitum = new Mitum();
-	if (v === "v1") {
-		console.error("v1 is unavailable with ../../mitumjs/");
-		exit(-1);
-	}
 
 	log(
 		`creating transfer operations in logging/transfer-${token}/operations/`
 	);
 	const transfers = [];
-	for (let i = 0; i < n; i++) {
-		const fact = new TransfersFact(
+	for (let i = 0; i < ops; i++) {
+		const transferItems = [];
+		for (let j=0; j < items; j++) {
+			const item = new TransferItem(receiverAccounts[j].address, [new Amount(cid, "1")]);
+			transferItems.push(item);
+		}
+		const fact = new TransferFact(
 			new TimeStamp().UTC(),
-			accounts[i].address,
-			[new TransfersItem(genesis, [new Amount(cid, "1")])]
+			senderAccounts[i].address,
+			transferItems
 		);
-		const op = new OperationType(id, fact);
-		op.sign(accounts[i].private);
+		const op = new Operation(id, fact);
+		op.sign(senderAccounts[i].private);
 		transfers.push(op.toHintedObject());
 	}
 
