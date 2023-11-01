@@ -116,5 +116,5 @@ $>bash bash/db-last-confirmed.sh --host=<"mongodb host"> --db=<"database name">
 To get the timestamp of first sent operation in jtl.result, Run follow shell script.
 
 ```
-$>bash bash/db-first-send.sh --dir=<"dir path of folder which include jtl.result">
+$>bash bash/jmeter-first-send.sh --dir=<"dir path of folder which include jtl.result">
 ```
