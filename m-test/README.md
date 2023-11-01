@@ -14,95 +14,87 @@ v18.9.0
 
 __installation__
 
-Install __mitum-test__ first.
+Clone the repository
 
 ```sh
-$ git clone https://github.com/ProtoconNet/mitum-test-tps
-
-$ cd mitum-test-tps/m-test
-
-$ npm i
+$ git clone https://github.com/ProtoconNet/mitum-spec-tests
 ```
 
-Then locate [mitumjs](https://github.com/ProtoconNet/mitumjs) in mitum-spec-tests.
+Install mitum SDK.
 
 ```sh
+$ cd mitum-spec-tests 
+
 $ git clone https://github.com/ProtoconNet/mitumjs
 
-$ cp -r ./mitumjs ./mitum-spec-tests
-
-$ cd mitum-spec-tests/mitumjs
+$ cd mitumjs
 
 $ npm i
-
-$ npm i tsc, typescript
 
 $ npm run build
 ```
 
+Install the dependencies.
+```
+$ cd mitum-spec-tests/m-test
+
+$ npm i
+```
+
 ## Run
 
-* v1: mitum1
-* v2: mitum2 (mitumjs support only v2)
+After the execution of the first shell script, 
+
+the generated preliminary data is saved in a folder named after a timestamp value.
+
+For subsequent shell script executions, use this timestamp value as the name of the data directory."
 
 ### create-account
 
-Modify the variable in [create-account.sh](bash/create-account.sh) and run `bash bash/create-account.sh`.
+Modify the variable in [create-account.sh](bash/create-account.sh)
 
 ```sh
-V="mitum version; [v1 || v2]"
-MODE="api; this means that the script will use digest api to create-account"
-NETWORK="api address"
-ID="network id"
-CID="currency id to use"
-MAX_ITEMS="max number of items for each operation"
-GENESIS="genesis-address,genesis-private"
-N="the number of accounts to create" 
+MODE=""
+NETWORK_ID="network id"
+CURRENCY_ID="currency id to use"
+ITEMS="max number of items for each operation"
+GENESIS_ACCOUNT="genesis-address,genesis-private"
 INTERVAL="interval between each create-account request"
-node tools/create-account.js $V $MODE $NETWORK $ID $CID $MAX_ITEMS $GENESIS $N $INTERVAL
+```
+Run shell script with option
+
+```
+$>bash bash/create-account.sh --api=<http://api.example.com> --account-num=<"number of new accounts"> --contract-num=<"number of new contract accounts>
 ```
 
-### transfer
+### Create-Operations
 
-Modify the variable in [transfer.sh](bash/transfer.sh) and run `bash bash/transfer.sh`.
-
-In this case, only the operation files are created.
+Modify the variable in [transfer.sh](bash/create-operations.sh).
 
 ```sh
-V="mitum version; [v1 || v2]"
-ID="network id"
-CID="currency id to use"
-GENESIS="genesis address"
-N="the number of operations"
-ACCOUNTS="file path of accounts.json file; you can create this file with bash/create-account.sh"
-node tools/transfer.js $V $ID $CID $GENESIS $N $ACCOUNTS
+NETWORK_ID="network id"
+CURRENCY_ID="currency id to use"
+ITEMS="max number of items for each operation"
+```
+
+Run shell script with option
+
+```
+$>bash bash/create-operations.sh --total=<"total loads"> --data=<"timestamp value"> --type=<"account | credential">
 ```
 
 ### run jmeter
 
-Modify the variable in [test.sh](bash/test.sh) and run `bash bash/test.sh`.
+Modify the variable in [run-jmeter.sh](bash/run-jmeter.sh).
 
-If it is not possible to run normally, modify {N} of `JVM_ARGS="-Xms{N}g -Xmx{N}g"` in the line 171 of [test.js](tools/test.js).
+If it is not possible to run normally, modify {N} of `JVM_ARGS="-Xms{N}g -Xmx{N}g"` in the [test.js](tools/test.js).
 
 ```sh
-TOKEN="directory path of transfers operation; you can create this folder with bash/transfer.sh"
-MODE="api; this means that the script will use digest api to test"
-NETWORK="api network addresses; seperator: ','"
-ID="network id"
-N="the number of all transfer operations to request"
-DURATION="rampup time in jmeter script"
-node tools/test.js $TOKEN $MODE $NETWORK $ID $N $DURATION
+MODE="api"
+NETWORK_ID="network id"
 ```
+Run shell script with option
 
-### tps
-
-Modify the variable in [tps.sh](bash/tps.sh) and run `bash bash/tps.sh`.
-
-The tps measurement takes some time to complete.
-
-```sh
-TOKEN="directory path of transfers operation; you can create this folder with bash/transfer.sh; run test.sh first"
-NETWORK="api network address to send lookup request"
-MONGO="enter mongodb address if you want to lookup fact-hash by mongodb instead of digest api"
-node tools/lookup.js $TOKEN $NETWORK $MONGO
+```
+$>bash bash/run-jmeter.sh --api=<"api url"> --period=<"jmeter ramp up period"> --data=<"dir path of result.jtl">
 ```

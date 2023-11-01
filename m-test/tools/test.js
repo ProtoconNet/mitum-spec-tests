@@ -4,37 +4,45 @@ import wait from "waait";
 import path from "path";
 import { fileURLToPath } from "url";
 import fs from "fs-extra";
+import { promises as file } from 'fs';
 
 const { ensureDirSync, writeFileSync, readFileSync } = fs;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 async function run() {
 	const argvs = process.argv.map((val) => val);
-	const token = argvs[2];
+	const operationDIR = argvs[2];
 	const mode = argvs[3];
-	const networks = argvs[4].split(",").filter((net) => net !== "");
-	const id = argvs[5];
-	const n = parseInt(argvs[6]);
-	const duration = parseInt(argvs[7]);
+	const apiEndpoints = argvs[4].split(",").filter((net) => net !== "");
+	const networkID = argvs[5];
+	const rampUpPeriod = parseInt(argvs[6]);
+	const n = await countFilesInDirectory(`${operationDIR}/ops`)
+
 	const arg = {
-		token,
+		operationDIR,
 		mode,
-		networks,
-		id,
+		apiEndpoints,
+		networkID,
+		rampUpPeriod,
 		n,
-		duration,
 	};
 	await test(arg);
 }
 
 await run();
 
-export async function test({ token, id, n, mode, networks, duration }) {
-	ensureDirSync(`logging/${token}/test-result/`);
-	log(`dir logging/${token}/test-result/ created`);
+export async function countFilesInDirectory(directoryPath) {
+	const items = await file.readdir(directoryPath, { withFileTypes: true });
+	const fileCount = items.filter(item => item.isFile()).length;
+	return fileCount;
+}
+
+export async function test({ operationDIR, mode,  apiEndpoints, networkID, rampUpPeriod, n }) {
+	ensureDirSync(`${operationDIR}/test-result/`);
+	log(`dir ${operationDIR}/test-result/ created`);
 
 	if (mode === "api") {
-		const parsedNet = networks.map((net) => {
+		const parsedNet = apiEndpoints.map((net) => {
 			const protocol = net.split("://")[0];
 			const address = net.split("://")[1].split(":")[0];
 			const port = net.split("://")[1].split(":")[1] || "";
@@ -45,9 +53,9 @@ export async function test({ token, id, n, mode, networks, duration }) {
 			};
 		});
 
-		const threadPerNet = parseInt(n / networks.length);
+		const threadPerNet = n / apiEndpoints.length;
 		const threads = [];
-		const netLen = networks.length;
+		const netLen = apiEndpoints.length;
 		for (let i = 0; i < netLen; i++) {
 			threads.push(threadPerNet);
 		}
@@ -63,7 +71,7 @@ export async function test({ token, id, n, mode, networks, duration }) {
         	<stringProp name="LoopController.loops">1</stringProp>
         </elementProp>
         <stringProp name="ThreadGroup.num_threads">${thread}</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">${duration}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${rampUpPeriod}</stringProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration"></stringProp>
         <stringProp name="ThreadGroup.delay"></stringProp>
@@ -103,7 +111,7 @@ export async function test({ token, id, n, mode, networks, duration }) {
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
             <stringProp name="delimiter"></stringProp>
             <stringProp name="fileEncoding">UTF-8</stringProp>
-            <stringProp name="filename">${fp}/logging/${token}/files.csv</stringProp>
+            <stringProp name="filename">${fp}/${operationDIR}/files.csv</stringProp>
             <boolProp name="ignoreFirstLine">false</boolProp>
             <boolProp name="quotedData">false</boolProp>
             <boolProp name="recycle">true</boolProp>
@@ -118,7 +126,7 @@ export async function test({ token, id, n, mode, networks, duration }) {
             	<collectionProp name="Arguments.arguments">
 					<elementProp name="" elementType="HTTPArgument">
 						<boolProp name="HTTPArgument.always_encode">false</boolProp>
-						<stringProp name="Argument.value">\${__FileToString(${fp}/logging/${token}/operations/\${__eval(\${TF})}.json,,)}</stringProp>
+						<stringProp name="Argument.value">\${__FileToString(${fp}/${operationDIR}\/ops\/\${__eval(\${TF})}.json,,)}</stringProp>
 						<stringProp name="Argument.metadata">=</stringProp>
 					</elementProp>
                 </collectionProp>
@@ -127,7 +135,7 @@ export async function test({ token, id, n, mode, networks, duration }) {
             <stringProp name="HTTPSampler.port">${parsedNet[idx].port}</stringProp>
             <stringProp name="HTTPSampler.protocol">${parsedNet[idx].protocol}</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-            <stringProp name="HTTPSampler.path">/builder/send</stringProp>
+            <stringProp name="HTTPSampler.path">/builder/send/queue</stringProp>
             <stringProp name="HTTPSampler.method">POST</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -161,35 +169,35 @@ export async function test({ token, id, n, mode, networks, duration }) {
 	</hashTree>
 </jmeterTestPlan>`.trim();
 
-		writeFileSync(`logging/${token}/test-result/test.jmx`, jmx);
-		log(`logging/${token}/test-result/test.jmx created`);
+		writeFileSync(`${operationDIR}/test-result/test.jmx`, jmx);
+		log(`${operationDIR}/test-result/test.jmx created`);
 		writeFileSync(
-			`logging/${token}/test-result/bash.sh`,
-			`JVM_ARGS="-Xms50g -Xmx50g" jmeter -n -t logging/${token}/test-result/test.jmx -l logging/${token}/test-result/result.jtl -j logging/${token}/test-result/jmeter.log`
+			`${operationDIR}/test-result/bash.sh`,
+			`JVM_ARGS="-Xms50g -Xmx50g" jmeter -n -t ${operationDIR}/test-result/test.jmx -l ${operationDIR}/test-result/result.jtl -j ${operationDIR}/test-result/jmeter.log`
 		);
-		log(`logging/${token}/test-result/bash.sh created`);
-		execSync(`bash logging/${token}/test-result/bash.sh`);
+		log(`${operationDIR}/test-result/bash.sh created`);
+		execSync(`bash ${operationDIR}/test-result/bash.sh`);
 	} else if (mode === "network-client") {
-		const files = readFileSync(`logging/${token}/files.csv`)
-			.split("\n")
-			.filter((ln) => ln !== "");
-		log(`get transfer files...`);
-
-		let pt = 0;
-		const interval = parseInt(duration / n);
-		writeFileSync(
-			`logging/${token}/test-result/result.jtl`,
-			new Date().getTime()
-		);
-		log(`logging/${token}/test-result/result.jtl created`);
-
-		files.forEach((f, idx) => {
-			execSync(
-				`./m network client send-operation '${id}' ${networks[pt]}#tls_insecure --body=logging/${token}/operations/${f}.json --log.level=fatal > logging/${token}/test-result/network-client-log/${f}.json 2>&1`
-			);
-			success(`${idx}:: ${d.fact.hash} sent by network-client`);
-		});
-		pt = (pt + 1) % networks.length;
-		await wait(interval);
+		// const files = readFileSync(`${newPath}/files.csv`)
+		// 	.split("\n")
+		// 	.filter((ln) => ln !== "");
+		// log(`get transfer files...`);
+		//
+		// let pt = 0;
+		// const interval = parseInt(rampUpPeriod / n);
+		// writeFileSync(
+		// 	`${newPath}/operations/test-result/result.jtl`,
+		// 	new Date().getTime()
+		// );
+		// log(`${newPath}/operations/test-result/result.jtl created`);
+		//
+		// files.forEach((f, idx) => {
+		// 	execSync(
+		// 		`./m network client send-operation '${networkID}' ${apiEndpoints[pt]}#tls_insecure --body=${newPath}/operations/${f}.json --log.level=fatal > ${newPath}/operations/test-result/network-client-log/${f}.json 2>&1`
+		// 	);
+		// 	success(`${idx}:: ${d.fact.hash} sent by network-client`);
+		// });
+		// pt = (pt + 1) % apiEndpoints.length;
+		// await wait(interval);
 	}
 }

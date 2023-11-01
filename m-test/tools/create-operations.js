@@ -2,56 +2,44 @@ import { Mitum } from "../../mitumjs/cjs/index.js";
 import { TimeStamp } from "../../mitumjs/cjs/types/time.js";
 import { Amount } from "../../mitumjs/cjs/common/amount.js";
 import { CreateAccountItem, CreateAccountFact } from "../../mitumjs/cjs/operation/currency/create-account.js";
+import { AssignItem, AssignFact } from "../../mitumjs/cjs/operation/credential/assign.js";
 import { Operation } from "../../mitumjs/cjs/operation/base/operation.js"
 import { log, warning } from "../log.js";
 import fs from "fs-extra";
 import {Big} from "../../mitumjs/cjs/types/math.js";
 import {Keys, PubKey} from "../../mitumjs/cjs/key/pub.js";
+import assert from "assert";
 
 const { ensureDirSync, readFileSync, writeFileSync } = fs;
 
-async function run() {
-	const argvs = process.argv.map((val) => val);
-	const id = argvs[2];
-	const cid = argvs[3];
-	const total = parseInt(argvs[4]);
-	const items = parseInt(argvs[5]);
-	const senders = argvs[6];
-	const arg = {
-		id,
+export function createAccounts({
+		networkID,
 		cid,
 		total,
 		items,
-		senders,
-	};
-
-	createOperations(arg);
-}
-
-await run();
-
-export function createOperations({ id, cid, total, items, senders }) {
-	const token = new Date().getTime();
-	ensureDirSync(`logging/test-${token}/operations/`);
-	log(`dir logging/test-${token}/operations/ created`);
+		baseDir,
+		subDir,
+}) {
+	ensureDirSync(`${baseDir}/${subDir}/create-accounts/ops/`);
+	log(`folder ${baseDir}/${subDir}/create-accounts/ops created`);
 	const ops = total/items
 
 	let senderAccounts = [];
 	try {
 		senderAccounts = [
-			...JSON.parse(readFileSync(senders, { encoding: "utf8" }))["accounts"],
+			...JSON.parse(readFileSync(`${baseDir}/setup/create-account/account-list.json`, { encoding: "utf8" }))["accounts"],
 		];
 		if (senderAccounts.length < ops) {
 			throw new Error("insufficient senderAccounts");
 		}
-		log(`get senderAccounts...`);
+		log(`get senderAccounts`);
 	} catch (e) {
-		warning(`insufficient senderAccounts or wrong file path`);
+		warning(`failed to get data from file`);
 		process.exit(-1);
 	}
 
 	log(
-		`creating operations in logging/test-${token}/operations/`
+		`creating operations in ${baseDir}/${subDir}/create-accounts/ops`
 	);
 
 	const mitum = new Mitum();
@@ -79,27 +67,141 @@ export function createOperations({ id, cid, total, items, senders }) {
 			senderAccounts[i].address,
 			createAccountItems
 		);
-		const op = new Operation(id, fact);
-		op.sign(senderAccounts[i].private);
+		const op = new Operation(networkID, fact);
+		op.sign(senderAccounts[i].privatekey);
 		testOperations.push(op.toHintedObject());
 	}
 
 	testOperations.forEach((op, idx) =>
 		writeFileSync(
-			`logging/test-${token}/operations/${idx}-${op.fact.hash}.json`,
+			`${baseDir}/${subDir}/create-accounts/ops/${idx}-${op.fact.hash}.json`,
 			JSON.stringify(op, null, 4)
 		)
 	);
-	log(`test operations files created in logging/test-${token}/operations/`);
+	log(`test operations files created in ${baseDir}/${subDir}/create-accounts/ops/`);
 
 	writeFileSync(
-		`logging/test-${token}/files.csv`,
+		`${baseDir}/${subDir}/create-accounts/files.csv`,
 		testOperations.map((op, idx) => `${idx}-${op.fact.hash}`).join("\n")
 	);
-	log(`logging/test-${token}/files.csv created`);
+	log(`${baseDir}/${subDir}/create-accounts/files.csv created`);
 	writeFileSync(
-		`logging/test-${token}/facts.csv`,
+		`${baseDir}/${subDir}/create-accounts/facts.csv`,
 		testOperations.map((op) => op.fact.hash).join("\n")
 	);
-	log(`logging/test-${token}/facts.csv created`);
+	log(`${baseDir}/${subDir}/create-accounts/facts.csv created`);
+	log(`Run shell script to run jmeter`)
+	log(`bash bash/run-jmeter.sh --api=http://localhost:54320 --data=${baseDir}/${subDir}/create-accounts`)
 }
+
+export function createCredentials({
+									  networkID,
+									  cid,
+									  total,
+									  items,
+									  baseDir,
+									  subDir,
+}) {
+	ensureDirSync(`${baseDir}/${subDir}/assign-credential/ops/`);
+	log(`folder ${baseDir}/${subDir}/assign-credential/ops created`);
+	const ops = total/items
+
+	let credentialServices = [];
+	try {
+		credentialServices = [
+			...JSON.parse(readFileSync(`${baseDir}/setup/credential-service/service-list.json`, { encoding: "utf8" }))["contracts"],
+		];
+		// if (credentialServices.length < ops) {
+		// 	throw new Error("insufficient senderAccounts");
+		// }
+		log(`get credentialServices`);
+	} catch (e) {
+		warning(`failed to get data from file`);
+		process.exit(-1);
+	}
+
+	log(
+		`creating operations in ${baseDir}/${subDir}/assign-credential/ops/`
+	);
+
+	const testOperations = [];
+	for (let i = 0; i < credentialServices.length; i++) {
+		const AssignItems = [];
+		for (let j=0; j < items; j++) {
+			const item = new AssignItem(
+				credentialServices[i].contract,
+				credentialServices[i].owner.address,
+				credentialServices[i].template,
+				`${j}`,
+				"test",
+				100,
+				200,
+				`did${j}`,
+				cid,
+			);
+			AssignItems.push(item);
+		}
+		const fact = new AssignFact(
+			new TimeStamp().UTC(),
+			credentialServices[i].owner.address,
+			AssignItems,
+		);
+		const op = new Operation(networkID, fact);
+		op.sign(credentialServices[i].owner.privatekey);
+		testOperations.push(op.toHintedObject());
+	}
+
+	testOperations.forEach((op, idx) =>
+		writeFileSync(
+			`${baseDir}/${subDir}/assign-credential/ops/${idx}-${op.fact.hash}.json`,
+			JSON.stringify(op, null, 4)
+		)
+	);
+	log(`test operations files created in ${baseDir}/${subDir}/assign-credential/ops`);
+
+	writeFileSync(
+		`${baseDir}/${subDir}/assign-credential/files.csv`,
+		testOperations.map((op, idx) => `${idx}-${op.fact.hash}`).join("\n")
+	);
+	log(`${baseDir}/${subDir}/assign-credential/files.csv created`);
+	writeFileSync(
+		`${baseDir}/${subDir}/assign-credential/facts.csv`,
+		testOperations.map((op) => op.fact.hash).join("\n")
+	);
+	log(`${baseDir}/${subDir}/assign-credential/facts.csv created`);
+	log(`Run shell script to run jmeter`)
+	log(`bash bash/run-jmeter.sh --api=http://localhost:54320 --data=${baseDir}/${subDir}/assign-credential`)
+}
+
+async function run() {
+	const args = process.argv.map((val) => val);
+	assert(args.length === 8)
+	const networkID = args[2];
+	const cid = args[3];
+	const total = parseInt(args[4]);
+	const items = parseInt(args[5]);
+	const timestamp = args[6];
+	const type = args[7]
+
+	const subTimestamp = new Date().getTime();
+	const baseDir = `test/${timestamp}`
+	const subDir = `subtest/${subTimestamp}`
+
+	const arg = {
+		networkID,
+		cid,
+		total,
+		items,
+		baseDir,
+		subDir
+	};
+
+	if (type === "account") {
+		createAccounts(arg);
+	} else if (type === "credential") {
+		createCredentials(arg)
+	}
+
+}
+
+await run();
