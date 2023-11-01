@@ -34,7 +34,7 @@ $ npm i
 $ npm run build
 ```
 
-Install the dependencies.
+Install the dependencies for m-test.
 ```
 $ cd mitum-spec-tests/m-test
 
@@ -43,38 +43,38 @@ $ npm i
 
 ## Run
 
-After the execution of the first shell script, 
+After the execution of the first shell script(create-account.sh), 
 
 the generated preliminary data is saved in a folder named after a timestamp value.
 
 For subsequent shell script executions, use this timestamp value as the name of the data directory."
 
-### create-account
+### Create account
 
 Modify the variable in [create-account.sh](bash/create-account.sh)
 
 ```sh
 MODE=""
-NETWORK_ID="network id"
-CURRENCY_ID="currency id to use"
-ITEMS="max number of items for each operation"
-GENESIS_ACCOUNT="genesis-address,genesis-private"
-INTERVAL="interval between each create-account request"
+NETWORK_ID=<"network id">
+CURRENCY_ID=<"currency id to use">
+ITEMS=<"max number of items for each operation">
+GENESIS_ACCOUNT=<"genesis-address,genesis-private">
+INTERVAL=<"interval between each create-account request">
 ```
 Run shell script with option
 
 ```
-$>bash bash/create-account.sh --api=<http://api.example.com> --account-num=<"number of new accounts"> --contract-num=<"number of new contract accounts>
+$>bash bash/create-account.sh --api=<http://api.example.com> --account-num=<"number of new accounts"> --contract-num=<"number of new contract accounts">
 ```
 
-### Create-Operations
+### Create operations
 
-Modify the variable in [transfer.sh](bash/create-operations.sh).
+Modify the variable in [create-operation.sh](bash/create-operations.sh).
 
 ```sh
-NETWORK_ID="network id"
-CURRENCY_ID="currency id to use"
-ITEMS="max number of items for each operation"
+NETWORK_ID=<"network id">
+CURRENCY_ID=<"currency id to use">
+ITEMS=<"max number of items for each operation">
 ```
 
 Run shell script with option
@@ -83,7 +83,7 @@ Run shell script with option
 $>bash bash/create-operations.sh --total=<"total loads"> --data=<"timestamp value"> --type=<"account | credential">
 ```
 
-### run jmeter
+### Run jmeter
 
 Modify the variable in [run-jmeter.sh](bash/run-jmeter.sh).
 
@@ -91,10 +91,30 @@ If it is not possible to run normally, modify {N} of `JVM_ARGS="-Xms{N}g -Xmx{N}
 
 ```sh
 MODE="api"
-NETWORK_ID="network id"
+NETWORK_ID=<"network id">
 ```
 Run shell script with option
 
 ```
-$>bash bash/run-jmeter.sh --api=<"api url"> --period=<"jmeter ramp up period"> --data=<"dir path of result.jtl">
+$>bash bash/run-jmeter.sh --api=<"api url"> --period=<"jmeter ramp up period"> --data=<"dir path to operations">
+```
+
+### Get Result
+
+To get results in api database, Run follow shell script.
+
+```
+$>bash bash/db-data.sh --host=<"mongodb host"> --db=<"database name">
+```
+
+To get the timestamp of last confirmed operation in api database, Run follow shell script.
+
+```
+$>bash bash/db-last-confirmed.sh --host=<"mongodb host"> --db=<"database name">
+```
+
+To get the timestamp of first sent operation in jtl.result, Run follow shell script.
+
+```
+$>bash bash/db-first-send.sh --dir=<"dir path of folder which include jtl.result">
 ```
