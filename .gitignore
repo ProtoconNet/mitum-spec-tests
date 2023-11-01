@@ -1,2 +1,8 @@
-node_modules/**
-logging/**
+**/logging/
+**/test/
+**/mitumjs/
+**/node_modules/
+**/jmeter.log
+**/test-result
+**/package-lock.json
+.idea/
