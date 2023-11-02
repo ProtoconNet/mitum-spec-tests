@@ -179,7 +179,7 @@ async function createContractAccount({
 		);
 		const item = new CreateContractAccountItem(keys, amounts, "mitum");
 		createContractAccountItems.push(item);
-		contractAccounts.push({owner: senderAccounts[i], address: item.address})
+		contractAccounts.push({owner: senderAccounts[i], address: keys.address.toString()})
 
 		const fact = new CreateContractAccountFact(
 			new TimeStamp().UTC(),
