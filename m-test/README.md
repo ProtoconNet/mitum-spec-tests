@@ -40,8 +40,33 @@ $ cd mitum-spec-tests/m-test
 
 $ npm i
 ```
+## Prerequisite
 
-## Run
+TPS testing generates a large volume of load, 
+
+which necessitates thorough preparation and planning in advance. 
+
+Firstly, it's essential to secure the required resources and bandwidth in the testing environment.
+
+### Adjust UDP Buffer Sizes
+
+For more details, visit [UDP Buffer Sizes](https://github.com/quic-go/quic-go/wiki/UDP-Buffer-Sizes).
+
+
+### Modify MAX ITEM Size
+
+Alter the Max item size value within the Mitum contract model.
+
+### Update Node Configuration to Accommodate Large Messages
+
+```
+parameters:
+  misc:
+    max_message_size: 500000000
+    object_cache_size: 500000000
+```
+
+## Run Test Script
 
 After the execution of the first shell script(create-account.sh), 
 
