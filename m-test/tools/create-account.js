@@ -123,7 +123,6 @@ async function createAccount({
 			}
 		}
 		accounts = accounts.concat(...accs);
-		await pause(interval);
 		phase--;
 		base = parseInt(base / 10);
 	}
@@ -164,7 +163,7 @@ async function createContractAccount({
 	const mitum = new Mitum();
 
 	const createContractAccountsOperations = [];
-	for (let i = 0; i < accN; i++) {
+	for (let i = 0; i < contractN; i++) {
 		const createContractAccountItems = [];
 		const amounts = [
 			new Amount(
@@ -192,7 +191,7 @@ async function createContractAccount({
 			.post(`${apiUrl}`, op.toHintedObject())
 			.then((_) => success(`contract-account:: OK; ${op.toHintedObject().fact.hash}`))
 			.catch((_) => warning(`contract-account:: BAD; ${op.toHintedObject().fact.hash}`));
-
+			await wait(100);
 		createContractAccountsOperations.push(op.toHintedObject());
 	}
 
@@ -246,7 +245,7 @@ async function createCredentialService({
 			.post(`${apiUrl}`, op.toHintedObject())
 			.then((_) => success(`create-service:: OK; ${op.toHintedObject().fact.hash}`))
 			.catch((_) => warning(`create-service:: BAD; ${op.toHintedObject().fact.hash}`));
-
+			await wait(100);
 		createCredentialServiceOperations.push(op.toHintedObject());
 	}
 
@@ -300,7 +299,7 @@ async function AddTemplate({
 			.post(`${apiUrl}`, op.toHintedObject())
 			.then((_) => success(`add-template:: OK; ${op.toHintedObject().fact.hash}`))
 			.catch((_) => warning(`add-template:: BAD; ${op.toHintedObject().fact.hash}`));
-
+			await wait(100);
 		addTemplateOperations.push(op.toHintedObject());
 	}
 
@@ -366,10 +365,11 @@ async function run() {
 	};
 
 	await createAccount(arg);
+	await pause(interval);
 	await createContractAccount(arg);
-	await pause(7);
+	await pause(interval);
 	await createCredentialService(arg);
-	await pause(7);
+	await pause(interval);
 	await AddTemplate(arg)
 
 	log(`Run shell script to create operation`)
@@ -377,4 +377,4 @@ async function run() {
 	log(`To make new credential : bash bash/create-operations.sh --data=${timestamp} --type=credential`)
 }
 
-await run();
+run();
