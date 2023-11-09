@@ -13,6 +13,7 @@ import assert from "assert";
 const { ensureDirSync, readFileSync, writeFileSync } = fs;
 
 export function createAccounts({
+		endpoint,
 		networkID,
 		cid,
 		total,
@@ -91,7 +92,7 @@ export function createAccounts({
 	);
 	log(`${baseDir}/${subDir}/create-accounts/facts.csv created`);
 	log(`Run shell script to run jmeter`)
-	log(`bash bash/run-jmeter.sh --api=http://localhost:54320 --data=${baseDir}/${subDir}/create-accounts`)
+	log(`bash bash/run-jmeter.sh --api=${endpoint} --data=${baseDir}/${subDir}/create-accounts`)
 }
 
 export function createCredentials({
@@ -170,24 +171,26 @@ export function createCredentials({
 	);
 	log(`${baseDir}/${subDir}/assign-credential/facts.csv created`);
 	log(`Run shell script to run jmeter`)
-	log(`bash bash/run-jmeter.sh --api=http://localhost:54320 --data=${baseDir}/${subDir}/assign-credential`)
+	log(`bash bash/run-jmeter.sh --api=${endpoint} --data=${baseDir}/${subDir}/assign-credential`)
 }
 
 async function run() {
 	const args = process.argv.map((val) => val);
-	assert(args.length === 8)
-	const networkID = args[2];
-	const cid = args[3];
-	const total = parseInt(args[4]);
-	const items = parseInt(args[5]);
-	const timestamp = args[6];
-	const type = args[7]
+	assert(args.length === 9)
+	const endpoint = args[2];
+	const networkID = args[3];
+	const cid = args[4];
+	const total = parseInt(args[5]);
+	const items = parseInt(args[6]);
+	const timestamp = args[7];
+	const type = args[8]
 
 	const subTimestamp = new Date().getTime();
 	const baseDir = `test/${timestamp}`
 	const subDir = `subtest/${subTimestamp}`
 
 	const arg = {
+		endpoint,
 		networkID,
 		cid,
 		total,
@@ -204,4 +207,4 @@ async function run() {
 
 }
 
-await run();
+run();
