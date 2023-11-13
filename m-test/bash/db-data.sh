@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # default option value
-HOST=localhost
-export MITUM_DATABASE=mcredential
+HOST=""
+DATABASE=""
 
 # handle option value
 for arg in "$@"; do
@@ -12,7 +12,7 @@ for arg in "$@"; do
     shift
     ;;
     --db=*)
-    MITUM_DATABASE="${arg#*=}"
+    DATABASE="${arg#*=}"
     shift
     ;;
     *)
@@ -21,4 +21,15 @@ for arg in "$@"; do
   esac
 done
 
+# check empty values
+if [ -z "$HOST" ]; then
+  echo -e "\033[0;33m  Error: empty accounts data directory. set with --host= \033[0m"
+  exit 1
+fi
+if [ -z "$DATABASE" ]; then
+  echo -e "\033[0;33m  Error: empty accounts data directory. set with --db= \033[0m"
+  exit 1
+fi
+
+export MITUM_DATABASE=$DATABASE
 mongosh --authenticationDatabase admin --quiet --host $HOST tools/mongo-get-data.js

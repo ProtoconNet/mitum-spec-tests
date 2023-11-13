@@ -1,4 +1,4 @@
-import { execSync } from "child_process";
+import {execSync, spawn} from "child_process";
 import { log } from "../log.js";
 import wait from "waait";
 import path from "path";
@@ -11,25 +11,35 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 async function run() {
 	const argvs = process.argv.map((val) => val);
-	const operationDIR = argvs[2];
+	const subDir = argvs[2];
 	const mode = argvs[3];
-	const apiEndpoints = argvs[4].split(",").filter((net) => net !== "");
+	const timestamp = argvs[4]
 	const networkID = argvs[5];
 	const rampUpPeriod = parseInt(argvs[6]);
+
+	const baseDir = `test/${timestamp}`
+	const api = JSON.parse(readFileSync(`${baseDir}/setup/api.json`, { encoding: "utf8" }));
+	const urls = api["url"];
+	const mongo = api["mongo"];
+	const db = api["db"];
+	const apiEndpoints = urls.split(",").filter((net) => net !== "");
+	const operationDIR = `${baseDir}/${subDir}`
+
 	const n = await countFilesInDirectory(`${operationDIR}/ops`)
 
 	const arg = {
 		operationDIR,
 		mode,
+		timestamp,
 		apiEndpoints,
 		networkID,
 		rampUpPeriod,
 		n,
+		mongo,
+		db,
 	};
-	await test(arg);
+	test(arg);
 }
-
-await run();
 
 export async function countFilesInDirectory(directoryPath) {
 	const items = await file.readdir(directoryPath, { withFileTypes: true });
@@ -37,9 +47,19 @@ export async function countFilesInDirectory(directoryPath) {
 	return fileCount;
 }
 
-export async function test({ operationDIR, mode,  apiEndpoints, networkID, rampUpPeriod, n }) {
+async function pause(duration) {
+	for (let i = 0;i <= duration; i++){
+		await wait(1000);
+		process.stdout.write('\r' + `Wait for ${duration-i} seconds`)
+	}
+	console.log("")
+}
+
+function test({ operationDIR, mode, timestamp, apiEndpoints, networkID, rampUpPeriod, n, mongo, db }) {
 	ensureDirSync(`${operationDIR}/test-result/`);
-	log(`dir ${operationDIR}/test-result/ created`);
+	const baseDir = `test/${timestamp}`
+	const api = JSON.parse(readFileSync(`${baseDir}/setup/api.json`, { encoding: "utf8" }));
+	// log(`dir ${operationDIR}/test-result/ created`);
 
 	if (mode === "api") {
 		const parsedNet = apiEndpoints.map((net) => {
@@ -63,7 +83,7 @@ export async function test({ operationDIR, mode,  apiEndpoints, networkID, rampU
 
 		const fp = __dirname.replace(/\/tools/, "");
 		const css = threads.map((thread, idx) => {
-			return ` 
+			return `
     <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="transfer${idx}" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
@@ -170,14 +190,42 @@ export async function test({ operationDIR, mode,  apiEndpoints, networkID, rampU
 </jmeterTestPlan>`.trim();
 
 		writeFileSync(`${operationDIR}/test-result/test.jmx`, jmx);
-		log(`${operationDIR}/test-result/test.jmx created`);
+		// log(`${operationDIR}/test-result/test.jmx created`);
 		writeFileSync(
 			`${operationDIR}/test-result/bash.sh`,
-			`JVM_ARGS="-Xms50g -Xmx50g" jmeter -n -t ${operationDIR}/test-result/test.jmx -l ${operationDIR}/test-result/result.jtl -j ${operationDIR}/test-result/jmeter.log`
+			`Out=$(bash bash/db-data.sh --host=${mongo} --db=${db})
+Before=$(echo "$Out" | awk 'NR==2 {print $NF}')
+# echo \"Before account : $Before\"
+JVM_ARGS="-Xms32g -Xmx32g" jmeter -Jlog_level.jmeter=FATAL_ERROR -Jlog_level.jorphan=FATAL_ERROR -n -t ${operationDIR}/test-result/test.jmx -l ${operationDIR}/test-result/result.jtl -j ${operationDIR}/test-result/jmeter.log > /dev/null 2>&1
+count=30
+while [ $count -ge 0 ]; do
+    echo -ne "Waiting: $count seconds)\\r"
+    ((count--))
+    sleep 1
+done
+# echo \"#command : bash bash/db-data.sh --host=${mongo} --db=${db}\"
+Out=$(bash bash/db-data.sh --host=${mongo} --db=${db})
+After=$(echo "$Out" | awk 'NR==2 {print $NF}')
+# echo \"After account : $After\"
+# echo \"#command : bash bash/jmeter-first-send.sh --dir=${operationDIR}/test-result\"
+DATE1=$(bash bash/jmeter-first-send.sh --dir=${operationDIR}/test-result)
+# echo \"#command : bash bash/db-last-confirmed.sh --host=${mongo} --db=${db}\"
+DATE2=$(bash bash/db-last-confirmed.sh --host=${mongo} --db=${db})
+DATE1_formatted=$(echo $DATE1 | sed 's/\\.[0-9]\\{3\\}Z//')
+DATE2_formatted=$(echo $DATE2 | sed 's/\\.[0-9]\\{3\\}Z//')
+ts1=$(date -j -f "%Y-%m-%dT%H:%M:%S" "$DATE1_formatted" +%s)
+ts2=$(date -j -f "%Y-%m-%dT%H:%M:%S" "$DATE2_formatted" +%s)
+difference=$((ts2 - ts1))
+echo \"New accounts: $((After-Before))\"
+echo \"Duration: $difference seconds\"
+`
 		);
-		log(`${operationDIR}/test-result/bash.sh created`);
-		execSync(`bash ${operationDIR}/test-result/bash.sh`);
-	} else if (mode === "network-client") {
+
+		const subprocess = spawn('bash',
+			[`${operationDIR}/test-result/bash.sh`],
+			{ detached: false, stdio: 'inherit' });
+
+	 }  else if (mode === "network-client") {
 		// const files = readFileSync(`${newPath}/files.csv`)
 		// 	.split("\n")
 		// 	.filter((ln) => ln !== "");
@@ -199,5 +247,7 @@ export async function test({ operationDIR, mode,  apiEndpoints, networkID, rampU
 		// });
 		// pt = (pt + 1) % apiEndpoints.length;
 		// await wait(interval);
-	}
+	 }
 }
+
+await run();

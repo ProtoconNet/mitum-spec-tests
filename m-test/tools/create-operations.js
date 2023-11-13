@@ -9,6 +9,7 @@ import fs from "fs-extra";
 import {Big} from "../../mitumjs/cjs/types/math.js";
 import {Keys, PubKey} from "../../mitumjs/cjs/key/pub.js";
 import assert from "assert";
+import { execSync, spawn } from 'child_process';
 
 const { ensureDirSync, readFileSync, writeFileSync } = fs;
 
@@ -19,9 +20,11 @@ export function createAccounts({
 		items,
 		baseDir,
 		subDir,
+	    timestamp,
+	    rampup,
 }) {
 	ensureDirSync(`${baseDir}/${subDir}/create-accounts/ops/`);
-	log(`folder ${baseDir}/${subDir}/create-accounts/ops created`);
+	// log(`folder ${baseDir}/${subDir}/create-accounts/ops created`);
 	const ops = total/items
 
 	let senderAccounts = [];
@@ -32,15 +35,13 @@ export function createAccounts({
 		if (senderAccounts.length < ops) {
 			throw new Error("insufficient senderAccounts");
 		}
-		log(`get senderAccounts`);
+		// log(`get senderAccounts`);
 	} catch (e) {
 		warning(`failed to get data from file`);
 		process.exit(-1);
 	}
 
-	log(
-		`creating operations in ${baseDir}/${subDir}/create-accounts/ops`
-	);
+	// log(`creating operations in ${baseDir}/${subDir}/create-accounts/ops`);
 
 	const mitum = new Mitum();
 
@@ -54,7 +55,12 @@ export function createAccounts({
 					new Big(1).toString()
 				),
 			];
-			const kp = mitum.account.key();
+			let kp
+			try {
+				kp = mitum.account.key();
+			} catch (err) {
+				continue
+			}
 			const keys = new Keys(
 				[new PubKey(kp.publickey, 100)],
 				100
@@ -78,32 +84,38 @@ export function createAccounts({
 			JSON.stringify(op, null, 4)
 		)
 	);
-	log(`test operations files created in ${baseDir}/${subDir}/create-accounts/ops/`);
+	// log(`test operations files created in ${baseDir}/${subDir}/create-accounts/ops/`);
 
 	writeFileSync(
 		`${baseDir}/${subDir}/create-accounts/files.csv`,
 		testOperations.map((op, idx) => `${idx}-${op.fact.hash}`).join("\n")
 	);
-	log(`${baseDir}/${subDir}/create-accounts/files.csv created`);
+	// log(`${baseDir}/${subDir}/create-accounts/files.csv created`);
 	writeFileSync(
 		`${baseDir}/${subDir}/create-accounts/facts.csv`,
 		testOperations.map((op) => op.fact.hash).join("\n")
 	);
-	log(`${baseDir}/${subDir}/create-accounts/facts.csv created`);
-	log(`Run shell script to run jmeter`)
-	log(`bash bash/run-jmeter.sh --api=http://localhost:54320 --data=${baseDir}/${subDir}/create-accounts`)
+	// log(`${baseDir}/${subDir}/create-accounts/facts.csv created`);
+	log(`bash bash/run-jmeter.sh --data=${timestamp} --dir=${subDir}/create-accounts --period=${rampup}`);
+
+	const subprocess = spawn('bash',
+		['bash/run-jmeter.sh', `--data=${timestamp}`, `--dir=${subDir}/create-accounts`, ` --period=${rampup}`],
+		{ detached: false, stdio: 'inherit' });
+	log("Exit create-operation.sh")
 }
 
 export function createCredentials({
-									  networkID,
-									  cid,
-									  total,
-									  items,
-									  baseDir,
-									  subDir,
+	  networkID,
+	  cid,
+	  total,
+	  items,
+	  baseDir,
+	  subDir,
+	  timestamp,
+	  rampup,
 }) {
 	ensureDirSync(`${baseDir}/${subDir}/assign-credential/ops/`);
-	log(`folder ${baseDir}/${subDir}/assign-credential/ops created`);
+	// log(`folder ${baseDir}/${subDir}/assign-credential/ops created`);
 	const ops = total/items
 
 	let credentialServices = [];
@@ -114,15 +126,13 @@ export function createCredentials({
 		// if (credentialServices.length < ops) {
 		// 	throw new Error("insufficient senderAccounts");
 		// }
-		log(`get credentialServices`);
+		// log(`get credentialServices`);
 	} catch (e) {
 		warning(`failed to get data from file`);
 		process.exit(-1);
 	}
 
-	log(
-		`creating operations in ${baseDir}/${subDir}/assign-credential/ops/`
-	);
+	// log(`creating operations in ${baseDir}/${subDir}/assign-credential/ops/`);
 
 	const testOperations = [];
 	for (let i = 0; i < credentialServices.length; i++) {
@@ -157,43 +167,49 @@ export function createCredentials({
 			JSON.stringify(op, null, 4)
 		)
 	);
-	log(`test operations files created in ${baseDir}/${subDir}/assign-credential/ops`);
+	// log(`test operations files created in ${baseDir}/${subDir}/assign-credential/ops`);
 
 	writeFileSync(
 		`${baseDir}/${subDir}/assign-credential/files.csv`,
 		testOperations.map((op, idx) => `${idx}-${op.fact.hash}`).join("\n")
 	);
-	log(`${baseDir}/${subDir}/assign-credential/files.csv created`);
+	// log(`${baseDir}/${subDir}/assign-credential/files.csv created`);
 	writeFileSync(
 		`${baseDir}/${subDir}/assign-credential/facts.csv`,
 		testOperations.map((op) => op.fact.hash).join("\n")
 	);
-	log(`${baseDir}/${subDir}/assign-credential/facts.csv created`);
-	log(`Run shell script to run jmeter`)
-	log(`bash bash/run-jmeter.sh --api=http://localhost:54320 --data=${baseDir}/${subDir}/assign-credential`)
+	// log(`${baseDir}/${subDir}/assign-credential/facts.csv created`);
+	log(`bash bash/run-jmeter.sh --data=${timestamp} --dir=${subDir}/assign-credential  --period=${rampup}`)
+
+	const subprocess = spawn('bash',
+		['bash/run-jmeter.sh', `--data=${timestamp}`, `--dir=${subDir}/create-accounts`, `--period=${rampup}`],
+		{ detached: false, stdio: 'inherit' });
+	log("Exit create-operation.sh")
 }
 
 async function run() {
 	const args = process.argv.map((val) => val);
-	assert(args.length === 8)
+	assert(args.length === 9)
 	const networkID = args[2];
 	const cid = args[3];
 	const total = parseInt(args[4]);
 	const items = parseInt(args[5]);
 	const timestamp = args[6];
 	const type = args[7]
+	const rampup = args[8]
 
 	const subTimestamp = new Date().getTime();
 	const baseDir = `test/${timestamp}`
 	const subDir = `subtest/${subTimestamp}`
-
 	const arg = {
 		networkID,
 		cid,
 		total,
 		items,
 		baseDir,
-		subDir
+		subDir,
+		timestamp,
+		rampup,
 	};
 
 	if (type === "account") {
@@ -201,7 +217,6 @@ async function run() {
 	} else if (type === "credential") {
 		createCredentials(arg)
 	}
-
 }
 
 await run();

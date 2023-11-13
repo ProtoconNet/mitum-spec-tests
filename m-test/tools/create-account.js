@@ -1,6 +1,5 @@
 import axios from "axios";
 import wait from "waait";
-// import { execSync } from "child_process";
 import { Mitum } from "../../mitumjs/cjs/index.js";
 import { Big } from "../../mitumjs/cjs/types/math.js";
 import { TimeStamp } from "../../mitumjs/cjs/types/time.js";
@@ -109,6 +108,7 @@ async function createAccount({
 			);
 
 			if (mode === "api") {
+				console.log(apiUrl)
 				await axios
 					.post(`${apiUrl}`, d)
 					.then((_) => success(`phase ${count}:: OK; ${d.fact.hash}`))
@@ -192,7 +192,7 @@ async function createContractAccount({
 			.post(`${apiUrl}`, op.toHintedObject())
 			.then((_) => success(`contract-account:: OK; ${op.toHintedObject().fact.hash}`))
 			.catch((_) => warning(`contract-account:: BAD; ${op.toHintedObject().fact.hash}`));
-
+		await wait(1)
 		createContractAccountsOperations.push(op.toHintedObject());
 	}
 
@@ -246,7 +246,7 @@ async function createCredentialService({
 			.post(`${apiUrl}`, op.toHintedObject())
 			.then((_) => success(`create-service:: OK; ${op.toHintedObject().fact.hash}`))
 			.catch((_) => warning(`create-service:: BAD; ${op.toHintedObject().fact.hash}`));
-
+		await wait(1)
 		createCredentialServiceOperations.push(op.toHintedObject());
 	}
 
@@ -300,7 +300,7 @@ async function AddTemplate({
 			.post(`${apiUrl}`, op.toHintedObject())
 			.then((_) => success(`add-template:: OK; ${op.toHintedObject().fact.hash}`))
 			.catch((_) => warning(`add-template:: BAD; ${op.toHintedObject().fact.hash}`));
-
+		await wait(1)
 		addTemplateOperations.push(op.toHintedObject());
 	}
 
@@ -338,7 +338,7 @@ async function pause(duration) {
 
 async function run() {
 	const args = process.argv.map((val) => val);
-	assert(args.length === 11)
+	assert(args.length === 13)
 	const mode = args[2];
 	const endpoint = args[3];
 	const networkID = args[4];
@@ -348,11 +348,13 @@ async function run() {
 	const accN = parseInt(args[8]);
 	const contractN = parseInt(args[9]);
 	const interval = parseInt(args[10]);
+	const mongo = args[11]
+	const db = args[12]
 
 	const timestamp = new Date().getTime();
 	const baseDir = `test/${timestamp}/setup`
 	apiUrl = `${endpoint}/builder/send/queue`
-
+	console.log(apiUrl)
 	const arg = {
 		mode,
 		networkID,
@@ -366,15 +368,33 @@ async function run() {
 	};
 
 	await createAccount(arg);
-	await createContractAccount(arg);
-	await pause(7);
-	await createCredentialService(arg);
-	await pause(7);
-	await AddTemplate(arg)
 
-	log(`Run shell script to create operation`)
-	log(`To make new account : bash bash/create-operations.sh --data=${timestamp} --type=account`)
-	log(`To make new credential : bash bash/create-operations.sh --data=${timestamp} --type=credential`)
+	if (contractN > 0) {
+		await createContractAccount(arg);
+		await pause(10);
+		await createCredentialService(arg);
+		await pause(10);
+		await AddTemplate(arg)
+	}
+
+	if (contractN < 1) {
+		console.log(`To see result and to make new account`);
+		console.log(`bash bash/db-data.sh --host=${mongo} --db=${db}`);
+		console.log(`bash bash/create-operations.sh --data=${timestamp} --type=account`);
+	} else {
+		console.log(`To see result and to make new credential`);
+		console.log(`bash bash/db-data.sh --host=${mongo} --db=${db}`);
+		console.log(`bash bash/create-operations.sh --data=${timestamp} --type=credential`);
+	}
+
+	writeFileSync(
+		`${baseDir}/api.json`,
+		JSON.stringify({
+			url : `${endpoint}`,
+			mongo : `${mongo}`,
+			db : `${db}`,
+		}, null, 4)
+	)
 }
 
 await run();
