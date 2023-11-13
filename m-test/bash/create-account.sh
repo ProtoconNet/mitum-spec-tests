@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # default option value
-API_ENDPOINTS="" # api url : sample "http://localhost:54320"
-ACCOUNTS_COUNT=80
+API_ENDPOINTS="http://localhost:54320" # api url : sample "http://localhost:54320"
+ACCOUNTS_COUNT=200
 CONTRACT_ACCOUNTS_COUNT=0
-MONGO_HOST=""
-DATABASE=""
+MONGO_HOST="localhost"
+DATABASE="mcredential"
 
 # variables
 MODE="api"

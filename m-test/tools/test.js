@@ -197,7 +197,7 @@ function test({ operationDIR, mode, timestamp, apiEndpoints, networkID, rampUpPe
 Before=$(echo "$Out" | awk 'NR==2 {print $NF}')
 # echo \"Before account : $Before\"
 JVM_ARGS="-Xms32g -Xmx32g" jmeter -Jlog_level.jmeter=FATAL_ERROR -Jlog_level.jorphan=FATAL_ERROR -n -t ${operationDIR}/test-result/test.jmx -l ${operationDIR}/test-result/result.jtl -j ${operationDIR}/test-result/jmeter.log > /dev/null 2>&1
-count=30
+count=10
 while [ $count -ge 0 ]; do
     echo -ne "Waiting: $count seconds)\\r"
     ((count--))

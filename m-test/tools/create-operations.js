@@ -44,7 +44,7 @@ export function createAccounts({
 	// log(`creating operations in ${baseDir}/${subDir}/create-accounts/ops`);
 
 	const mitum = new Mitum();
-
+	let totalCount = total
 	const testOperations = [];
 	for (let i = 0; i < ops; i++) {
 		const createAccountItems = [];
@@ -66,8 +66,13 @@ export function createAccounts({
 				100
 			);
 			const item = new CreateAccountItem(keys, amounts, "mitum");
+			totalCount = totalCount - 1;
+			if (totalCount < 0) {
+				break
+			}
 			createAccountItems.push(item);
 		}
+
 		const fact = new CreateAccountFact(
 			new TimeStamp().UTC(),
 			senderAccounts[i].address,

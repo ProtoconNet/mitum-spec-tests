@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # default option value
-TOTAL=30000
-ITEM=1000
+TOTAL=33000
+ITEM=3000
 TIMESTAMP=""  # timestamp token in previous log : sample 1698797337011
 TYPE="" # type of new operation : sample "account" | "credential"
-RAMPUP=10
+RAMPUP=5
 
 # handle option value
 for arg in "$@"; do
