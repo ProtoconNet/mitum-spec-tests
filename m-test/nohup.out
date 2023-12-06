@@ -1,0 +1,233 @@
+Type = account / Total Load = 31000 / Items Count = 3000 / RampUp Period = 5
+Type = account / Total Load = 40000 / Items Count = 3000 / RampUp Period = 5
+Type = account / Total Load = 33000 / Items Count = 3000 / RampUp Period = 5
+Type = account / Total Load = 35000 / Items Count = 3000 / RampUp Period = 5
+Type = account / Total Load = 39000 / Items Count = 3000 / RampUp Period = 5
+Type = account / Total Load = 30000 / Items Count = 3000 / RampUp Period = 5
+Type = account / Total Load = 37000 / Items Count = 3000 / RampUp Period = 5
+[37m2023-11-14T00:32:03.766Z: [39m[33mbash bash/run-jmeter.sh --data=1699921722123 --dir=subtest/1699921875219/create-accounts --period=5[39m
+[37m2023-11-14T00:32:03.769Z: [39m[33mExit create-operation.sh[39m
+[37m2023-11-14T00:32:05.813Z: [39m[33mbash bash/run-jmeter.sh --data=1699921722123 --dir=subtest/1699921875212/create-accounts --period=5[39m
+[37m2023-11-14T00:32:05.817Z: [39m[33mExit create-operation.sh[39m
+Waiting: 30 seconds)[37m2023-11-14T00:32:09.689Z: [39m[33mbash bash/run-jmeter.sh --data=1699921722123 --dir=subtest/1699921875211/create-accounts --period=5[39m
+[37m2023-11-14T00:32:09.692Z: [39m[33mExit create-operation.sh[39m
+Waiting: 29 seconds)Waiting: 28 seconds)Waiting: 30 seconds)Waiting: 27 seconds)Waiting: 29 seconds)Waiting: 26 seconds)Waiting: 28 seconds)[37m2023-11-14T00:32:13.025Z: [39m[33mbash bash/run-jmeter.sh --data=1699921722123 --dir=subtest/1699921875220/create-accounts --period=5[39m
+[37m2023-11-14T00:32:13.028Z: [39m[33mExit create-operation.sh[39m
+Waiting: 25 seconds)Waiting: 27 seconds)Waiting: 30 seconds)Waiting: 24 seconds)Waiting: 26 seconds)Waiting: 29 seconds)[37m2023-11-14T00:32:15.811Z: [39m[33mbash bash/run-jmeter.sh --data=1699921722123 --dir=subtest/1699921875215/create-accounts --period=5[39m
+[37m2023-11-14T00:32:15.814Z: [39m[33mExit create-operation.sh[39m
+Waiting: 23 seconds)Waiting: 25 seconds)Waiting: 28 seconds)Waiting: 22 seconds)Waiting: 24 seconds)Waiting: 27 seconds)Waiting: 21 seconds)Waiting: 23 seconds)Waiting: 30 seconds)Waiting: 26 seconds)Waiting: 20 seconds)Waiting: 22 seconds)Waiting: 29 seconds)Waiting: 25 seconds)Waiting: 19 seconds)Waiting: 21 seconds)Waiting: 28 seconds)[37m2023-11-14T00:32:20.287Z: [39m[33mbash bash/run-jmeter.sh --data=1699921722123 --dir=subtest/1699921875222/create-accounts --period=5[39m
+[37m2023-11-14T00:32:20.290Z: [39m[33mExit create-operation.sh[39m
+[37m2023-11-14T00:32:20.621Z: [39m[33mbash bash/run-jmeter.sh --data=1699921722123 --dir=subtest/1699921875219/create-accounts --period=5[39m
+[37m2023-11-14T00:32:20.624Z: [39m[33mExit create-operation.sh[39m
+Waiting: 24 seconds)Waiting: 30 seconds)Waiting: 18 seconds)Waiting: 20 seconds)Waiting: 27 seconds)Waiting: 23 seconds)Waiting: 29 seconds)Waiting: 17 seconds)Waiting: 19 seconds)Waiting: 26 seconds)Waiting: 22 seconds)Waiting: 28 seconds)Waiting: 16 seconds)Waiting: 18 seconds)Waiting: 25 seconds)Waiting: 21 seconds)Waiting: 27 seconds)Waiting: 15 seconds)Waiting: 17 seconds)Waiting: 24 seconds)Waiting: 20 seconds)Waiting: 26 seconds)Waiting: 14 seconds)Waiting: 16 seconds)Waiting: 23 seconds)Waiting: 30 seconds)Waiting: 19 seconds)Waiting: 30 seconds)Waiting: 25 seconds)Waiting: 13 seconds)Waiting: 15 seconds)Waiting: 22 seconds)Waiting: 29 seconds)Waiting: 18 seconds)Waiting: 29 seconds)Waiting: 24 seconds)Waiting: 12 seconds)Waiting: 14 seconds)Waiting: 21 seconds)Waiting: 28 seconds)Waiting: 17 seconds)Waiting: 28 seconds)Waiting: 23 seconds)Waiting: 11 seconds)Waiting: 13 seconds)Waiting: 20 seconds)Waiting: 27 seconds)Waiting: 16 seconds)Waiting: 27 seconds)Waiting: 22 seconds)Waiting: 10 seconds)Waiting: 12 seconds)Waiting: 19 seconds)Waiting: 26 seconds)Waiting: 15 seconds)Waiting: 26 seconds)Waiting: 21 seconds)Waiting: 9 seconds)Waiting: 11 seconds)Waiting: 18 seconds)Waiting: 25 seconds)Waiting: 14 seconds)Waiting: 25 seconds)Waiting: 20 seconds)Waiting: 8 seconds)Waiting: 10 seconds)Waiting: 17 seconds)Waiting: 24 seconds)Waiting: 13 seconds)Waiting: 24 seconds)Waiting: 19 seconds)Waiting: 7 seconds)Waiting: 9 seconds)Waiting: 16 seconds)Waiting: 23 seconds)Waiting: 12 seconds)Waiting: 23 seconds)Waiting: 18 seconds)Waiting: 6 seconds)Waiting: 8 seconds)Waiting: 15 seconds)Waiting: 22 seconds)Waiting: 11 seconds)Waiting: 22 seconds)Waiting: 17 seconds)Waiting: 5 seconds)Waiting: 7 seconds)Waiting: 14 seconds)Waiting: 21 seconds)Waiting: 10 seconds)Waiting: 21 seconds)Waiting: 16 seconds)Waiting: 4 seconds)Waiting: 6 seconds)Waiting: 13 seconds)Waiting: 20 seconds)Waiting: 9 seconds)Waiting: 20 seconds)Waiting: 15 seconds)Waiting: 3 seconds)Waiting: 5 seconds)Waiting: 12 seconds)Waiting: 19 seconds)Waiting: 8 seconds)Waiting: 19 seconds)Waiting: 14 seconds)Waiting: 2 seconds)Waiting: 4 seconds)Waiting: 11 seconds)Waiting: 18 seconds)Waiting: 7 seconds)Waiting: 18 seconds)Waiting: 13 seconds)Waiting: 1 seconds)Waiting: 3 seconds)Waiting: 10 seconds)Waiting: 17 seconds)Waiting: 6 seconds)Waiting: 17 seconds)Waiting: 12 seconds)Waiting: 0 seconds)Waiting: 2 seconds)Waiting: 9 seconds)Waiting: 16 seconds)Waiting: 5 seconds)Waiting: 16 seconds)Waiting: 11 seconds)#command : bash bash/db-data.sh --host=172.31.2.159 --db=tps1
+Waiting: 1 seconds)Waiting: 8 seconds)Waiting: 15 seconds)Waiting: 4 seconds)Waiting: 15 seconds)Waiting: 10 seconds)Waiting: 0 seconds)Waiting: 7 seconds)#command : bash bash/jmeter-first-send.sh --dir=test/1699921722123/subtest/1699921875219/create-accounts/test-result
+#command : bash bash/db-last-confirmed.sh --host=172.31.2.159 --db=tps1
+Waiting: 14 seconds)Waiting: 3 seconds)Waiting: 14 seconds)Waiting: 9 seconds)#command : bash bash/db-data.sh --host=172.31.2.159 --db=tps1
+Waiting: 6 seconds)New accounts: 46000
+Duration: 11 seconds
+Waiting: 13 seconds)Waiting: 2 seconds)Waiting: 13 seconds)Waiting: 8 seconds)Waiting: 5 seconds)#command : bash bash/jmeter-first-send.sh --dir=test/1699921722123/subtest/1699921875212/create-accounts/test-result
+#command : bash bash/db-last-confirmed.sh --host=172.31.2.159 --db=tps1
+Waiting: 12 seconds)Waiting: 1 seconds)Waiting: 12 seconds)New accounts: 46000
+Duration: 9 seconds
+Waiting: 7 seconds)Waiting: 4 seconds)Waiting: 11 seconds)Waiting: 0 seconds)Waiting: 11 seconds)Waiting: 6 seconds)Waiting: 3 seconds)Waiting: 10 seconds)#command : bash bash/db-data.sh --host=172.31.2.159 --db=tps1
+Waiting: 10 seconds)Waiting: 5 seconds)Waiting: 2 seconds)Waiting: 9 seconds)#command : bash bash/jmeter-first-send.sh --dir=test/1699921722123/subtest/1699921875211/create-accounts/test-result
+#command : bash bash/db-last-confirmed.sh --host=172.31.2.159 --db=tps1
+Waiting: 9 seconds)Waiting: 4 seconds)New accounts: 46000
+Duration: 5 seconds
+Waiting: 1 seconds)Waiting: 8 seconds)Waiting: 8 seconds)Waiting: 3 seconds)Waiting: 0 seconds)Waiting: 7 seconds)Waiting: 7 seconds)Waiting: 2 seconds)#command : bash bash/db-data.sh --host=172.31.2.159 --db=tps1
+Waiting: 6 seconds)#command : bash bash/jmeter-first-send.sh --dir=test/1699921722123/subtest/1699921875220/create-accounts/test-result
+#command : bash bash/db-last-confirmed.sh --host=172.31.2.159 --db=tps1
+Waiting: 6 seconds)Waiting: 1 seconds)Waiting: 5 seconds)New accounts: 46000
+Duration: 2 seconds
+Waiting: 5 seconds)Waiting: 0 seconds)Waiting: 4 seconds)Waiting: 4 seconds)#command : bash bash/db-data.sh --host=172.31.2.159 --db=tps1
+Waiting: 3 seconds)#command : bash bash/jmeter-first-send.sh --dir=test/1699921722123/subtest/1699921875215/create-accounts/test-result
+#command : bash bash/db-last-confirmed.sh --host=172.31.2.159 --db=tps1
+Waiting: 3 seconds)New accounts: 46000
+Duration: 10 seconds
+Waiting: 2 seconds)Waiting: 2 seconds)Waiting: 1 seconds)Waiting: 1 seconds)Waiting: 0 seconds)Waiting: 0 seconds)#command : bash bash/db-data.sh --host=172.31.2.159 --db=tps1
+#command : bash bash/db-data.sh --host=172.31.2.159 --db=tps1
+#command : bash bash/jmeter-first-send.sh --dir=test/1699921722123/subtest/1699921875222/create-accounts/test-result
+#command : bash bash/db-last-confirmed.sh --host=172.31.2.159 --db=tps1
+#command : bash bash/jmeter-first-send.sh --dir=test/1699921722123/subtest/1699921875219/create-accounts/test-result
+#command : bash bash/db-last-confirmed.sh --host=172.31.2.159 --db=tps1
+New accounts: 118000
+Duration: 5 seconds
+New accounts: 126327
+Duration: 22 seconds
+Type = account / Total Load = 30000 / Items Count = 3000 / RampUp Period = 5
+[37m2023-11-14T00:35:38.217Z: [39m[33mbash bash/run-jmeter.sh --data=1699921722123 --dir=subtest/1699922090400/create-accounts --period=5[39m
+[37m2023-11-14T00:35:38.221Z: [39m[33mExit create-operation.sh[39m
+Waiting: 30 seconds)Waiting: 29 seconds)Waiting: 28 seconds)Waiting: 27 seconds)Waiting: 26 seconds)Waiting: 25 seconds)Waiting: 24 seconds)Waiting: 23 seconds)Waiting: 22 seconds)Waiting: 21 seconds)Waiting: 20 seconds)Waiting: 19 seconds)Waiting: 18 seconds)Waiting: 17 seconds)Waiting: 16 seconds)Waiting: 15 seconds)Waiting: 14 seconds)Waiting: 13 seconds)Waiting: 12 seconds)Waiting: 11 seconds)Waiting: 10 seconds)Waiting: 9 seconds)Waiting: 8 seconds)Waiting: 7 seconds)Waiting: 6 seconds)Waiting: 5 seconds)Waiting: 4 seconds)Waiting: 3 seconds)Waiting: 2 seconds)Waiting: 1 seconds)Waiting: 0 seconds)#command : bash bash/db-data.sh --host=172.31.2.159 --db=tps1
+#command : bash bash/jmeter-first-send.sh --dir=test/1699921722123/subtest/1699922090400/create-accounts/test-result
+#command : bash bash/db-last-confirmed.sh --host=172.31.2.159 --db=tps1
+New accounts: 0
+Duration: -193 seconds
+Type = account / Total Load = 31000 / Items Count = 3000 / RampUp Period = 5
+Type = account / Total Load = 30000 / Items Count = 3000 / RampUp Period = 5
+[37m2023-11-14T00:40:01.764Z: [39m[33mbash bash/run-jmeter.sh --data=1699922284153 --dir=subtest/1699922354211/create-accounts --period=5[39m
+[37m2023-11-14T00:40:01.767Z: [39m[33mExit create-operation.sh[39m
+Waiting: 30 seconds)Waiting: 29 seconds)Waiting: 28 seconds)Waiting: 27 seconds)Waiting: 26 seconds)Waiting: 25 seconds)Waiting: 24 seconds)Waiting: 23 seconds)Waiting: 22 seconds)Waiting: 21 seconds)Waiting: 20 seconds)Waiting: 19 seconds)Waiting: 18 seconds)Waiting: 17 seconds)Waiting: 16 seconds)Waiting: 15 seconds)Waiting: 14 seconds)Waiting: 13 seconds)Waiting: 12 seconds)Waiting: 11 seconds)Waiting: 10 seconds)Waiting: 9 seconds)Waiting: 8 seconds)Waiting: 7 seconds)Waiting: 6 seconds)Waiting: 5 seconds)Waiting: 4 seconds)Waiting: 3 seconds)Waiting: 2 seconds)Waiting: 1 seconds)Waiting: 0 seconds)#command : bash bash/db-data.sh --host=172.31.2.159 --db=tps1
+#command : bash bash/jmeter-first-send.sh --dir=test/1699922284153/subtest/1699922354211/create-accounts/test-result
+#command : bash bash/db-last-confirmed.sh --host=172.31.2.159 --db=tps1
+New accounts: 30000
+Duration: 10 seconds
+Type = account / Total Load = 31000 / Items Count = 3000 / RampUp Period = 5
+[37m2023-11-14T00:41:29.954Z: [39m[33mbash bash/run-jmeter.sh --data=1699922284153 --dir=subtest/1699922440483/create-accounts --period=5[39m
+[37m2023-11-14T00:41:29.957Z: [39m[33mExit create-operation.sh[39m
+Waiting: 30 seconds)Waiting: 29 seconds)Waiting: 28 seconds)Waiting: 27 seconds)Waiting: 26 seconds)Waiting: 25 seconds)Waiting: 24 seconds)Waiting: 23 seconds)Waiting: 22 seconds)Waiting: 21 seconds)Waiting: 20 seconds)Waiting: 19 seconds)Waiting: 18 seconds)Waiting: 17 seconds)Waiting: 16 seconds)Waiting: 15 seconds)Waiting: 14 seconds)Waiting: 13 seconds)Waiting: 12 seconds)Waiting: 11 seconds)Waiting: 10 seconds)Waiting: 9 seconds)Waiting: 8 seconds)Waiting: 7 seconds)Waiting: 6 seconds)Waiting: 5 seconds)Waiting: 4 seconds)Waiting: 3 seconds)Waiting: 2 seconds)Waiting: 1 seconds)Waiting: 0 seconds)#command : bash bash/db-data.sh --host=172.31.2.159 --db=tps1
+#command : bash bash/jmeter-first-send.sh --dir=test/1699922284153/subtest/1699922440483/create-accounts/test-result
+#command : bash bash/db-last-confirmed.sh --host=172.31.2.159 --db=tps1
+New accounts: 31000
+Duration: 13 seconds
+Type = account / Total Load = 33000 / Items Count = 3000 / RampUp Period = 5
+[37m2023-11-14T00:43:01.896Z: [39m[33mbash bash/run-jmeter.sh --data=1699922284153 --dir=subtest/1699922528699/create-accounts --period=5[39m
+[37m2023-11-14T00:43:01.899Z: [39m[33mExit create-operation.sh[39m
+Waiting: 30 seconds)Waiting: 29 seconds)Waiting: 28 seconds)Waiting: 27 seconds)Waiting: 26 seconds)Waiting: 25 seconds)Waiting: 24 seconds)Waiting: 23 seconds)Waiting: 22 seconds)Waiting: 21 seconds)Waiting: 20 seconds)Waiting: 19 seconds)Waiting: 18 seconds)Waiting: 17 seconds)Waiting: 16 seconds)Waiting: 15 seconds)Waiting: 14 seconds)Waiting: 13 seconds)Waiting: 12 seconds)Waiting: 11 seconds)Waiting: 10 seconds)Waiting: 9 seconds)Waiting: 8 seconds)Waiting: 7 seconds)Waiting: 6 seconds)Waiting: 5 seconds)Waiting: 4 seconds)Waiting: 3 seconds)Waiting: 2 seconds)Waiting: 1 seconds)Waiting: 0 seconds)#command : bash bash/db-data.sh --host=172.31.2.159 --db=tps1
+#command : bash bash/jmeter-first-send.sh --dir=test/1699922284153/subtest/1699922528699/create-accounts/test-result
+#command : bash bash/db-last-confirmed.sh --host=172.31.2.159 --db=tps1
+New accounts: 33000
+Duration: 14 seconds
+Type = account / Total Load = 35000 / Items Count = 3000 / RampUp Period = 5
+[37m2023-11-14T00:44:35.880Z: [39m[33mbash bash/run-jmeter.sh --data=1699922284153 --dir=subtest/1699922620745/create-accounts --period=5[39m
+[37m2023-11-14T00:44:35.884Z: [39m[33mExit create-operation.sh[39m
+Waiting: 30 seconds)Waiting: 29 seconds)Waiting: 28 seconds)Waiting: 27 seconds)Waiting: 26 seconds)Waiting: 25 seconds)Waiting: 24 seconds)Waiting: 23 seconds)Waiting: 22 seconds)Waiting: 21 seconds)Waiting: 20 seconds)Waiting: 19 seconds)Waiting: 18 seconds)Waiting: 17 seconds)Waiting: 16 seconds)Waiting: 15 seconds)Waiting: 14 seconds)Waiting: 13 seconds)Waiting: 12 seconds)Waiting: 11 seconds)Waiting: 10 seconds)Waiting: 9 seconds)Waiting: 8 seconds)Waiting: 7 seconds)Waiting: 6 seconds)Waiting: 5 seconds)Waiting: 4 seconds)Waiting: 3 seconds)Waiting: 2 seconds)Waiting: 1 seconds)Waiting: 0 seconds)#command : bash bash/db-data.sh --host=172.31.2.159 --db=tps1
+#command : bash bash/jmeter-first-send.sh --dir=test/1699922284153/subtest/1699922620745/create-accounts/test-result
+#command : bash bash/db-last-confirmed.sh --host=172.31.2.159 --db=tps1
+New accounts: 35000
+Duration: 15 seconds
+Type = account / Total Load = 37000 / Items Count = 3000 / RampUp Period = 5
+[37m2023-11-14T00:46:13.116Z: [39m[33mbash bash/run-jmeter.sh --data=1699922284153 --dir=subtest/1699922714686/create-accounts --period=5[39m
+[37m2023-11-14T00:46:13.120Z: [39m[33mExit create-operation.sh[39m
+Waiting: 30 seconds)Waiting: 29 seconds)Waiting: 28 seconds)Waiting: 27 seconds)Waiting: 26 seconds)Waiting: 25 seconds)Waiting: 24 seconds)Waiting: 23 seconds)Waiting: 22 seconds)Waiting: 21 seconds)Waiting: 20 seconds)Waiting: 19 seconds)Waiting: 18 seconds)Waiting: 17 seconds)Waiting: 16 seconds)Waiting: 15 seconds)Waiting: 14 seconds)Waiting: 13 seconds)Waiting: 12 seconds)Waiting: 11 seconds)Waiting: 10 seconds)Waiting: 9 seconds)Waiting: 8 seconds)Waiting: 7 seconds)Waiting: 6 seconds)Waiting: 5 seconds)Waiting: 4 seconds)Waiting: 3 seconds)Waiting: 2 seconds)Waiting: 1 seconds)Waiting: 0 seconds)#command : bash bash/db-data.sh --host=172.31.2.159 --db=tps1
+#command : bash bash/jmeter-first-send.sh --dir=test/1699922284153/subtest/1699922714686/create-accounts/test-result
+#command : bash bash/db-last-confirmed.sh --host=172.31.2.159 --db=tps1
+New accounts: 37000
+Duration: 9 seconds
+Type = account / Total Load = 39000 / Items Count = 3000 / RampUp Period = 5
+[37m2023-11-14T00:47:54.214Z: [39m[33mbash bash/run-jmeter.sh --data=1699922284153 --dir=subtest/1699922811984/create-accounts --period=5[39m
+[37m2023-11-14T00:47:54.217Z: [39m[33mExit create-operation.sh[39m
+Waiting: 30 seconds)Waiting: 29 seconds)Waiting: 28 seconds)Waiting: 27 seconds)Waiting: 26 seconds)Waiting: 25 seconds)Waiting: 24 seconds)Waiting: 23 seconds)Waiting: 22 seconds)Waiting: 21 seconds)Waiting: 20 seconds)Waiting: 19 seconds)Waiting: 18 seconds)Waiting: 17 seconds)Waiting: 16 seconds)Waiting: 15 seconds)Waiting: 14 seconds)Waiting: 13 seconds)Waiting: 12 seconds)Waiting: 11 seconds)Waiting: 10 seconds)Waiting: 9 seconds)Waiting: 8 seconds)Waiting: 7 seconds)Waiting: 6 seconds)Waiting: 5 seconds)Waiting: 4 seconds)Waiting: 3 seconds)Waiting: 2 seconds)Waiting: 1 seconds)Waiting: 0 seconds)#command : bash bash/db-data.sh --host=172.31.2.159 --db=tps1
+#command : bash bash/jmeter-first-send.sh --dir=test/1699922284153/subtest/1699922811984/create-accounts/test-result
+#command : bash bash/db-last-confirmed.sh --host=172.31.2.159 --db=tps1
+New accounts: 39000
+Duration: 10 seconds
+Type = account / Total Load = 40000 / Items Count = 3000 / RampUp Period = 5
+[37m2023-11-14T00:49:37.482Z: [39m[33mbash bash/run-jmeter.sh --data=1699922284153 --dir=subtest/1699922913252/create-accounts --period=5[39m
+[37m2023-11-14T00:49:37.485Z: [39m[33mExit create-operation.sh[39m
+Waiting: 30 seconds)Waiting: 29 seconds)Waiting: 28 seconds)Waiting: 27 seconds)Waiting: 26 seconds)Waiting: 25 seconds)Waiting: 24 seconds)Waiting: 23 seconds)Waiting: 22 seconds)Waiting: 21 seconds)Waiting: 20 seconds)Waiting: 19 seconds)Waiting: 18 seconds)Waiting: 17 seconds)Waiting: 16 seconds)Waiting: 15 seconds)Waiting: 14 seconds)Waiting: 13 seconds)Waiting: 12 seconds)Waiting: 11 seconds)Waiting: 10 seconds)Waiting: 9 seconds)Waiting: 8 seconds)Waiting: 7 seconds)Waiting: 6 seconds)Waiting: 5 seconds)Waiting: 4 seconds)Waiting: 3 seconds)Waiting: 2 seconds)Waiting: 1 seconds)Waiting: 0 seconds)#command : bash bash/db-data.sh --host=172.31.2.159 --db=tps1
+#command : bash bash/jmeter-first-send.sh --dir=test/1699922284153/subtest/1699922913252/create-accounts/test-result
+#command : bash bash/db-last-confirmed.sh --host=172.31.2.159 --db=tps1
+New accounts: 40000
+Duration: 13 seconds
+Type = account / Total Load = 30000 / Items Count = 3000 / RampUp Period = 5
+[37m2023-11-14T01:14:42.164Z: [39m[33mbash bash/run-jmeter.sh --data=1699922284153 --dir=subtest/1699924435720/create-accounts --period=5[39m
+[37m2023-11-14T01:14:42.167Z: [39m[33mExit create-operation.sh[39m
+Waiting: 30 seconds)Waiting: 29 seconds)Waiting: 28 seconds)Waiting: 27 seconds)Waiting: 26 seconds)Waiting: 25 seconds)Waiting: 24 seconds)Waiting: 23 seconds)Waiting: 22 seconds)Waiting: 21 seconds)Waiting: 20 seconds)Waiting: 19 seconds)Waiting: 18 seconds)Waiting: 17 seconds)Waiting: 16 seconds)Waiting: 15 seconds)Waiting: 14 seconds)Waiting: 13 seconds)Waiting: 12 seconds)Waiting: 11 seconds)Waiting: 10 seconds)Waiting: 9 seconds)Waiting: 8 seconds)Waiting: 7 seconds)Waiting: 6 seconds)Waiting: 5 seconds)Waiting: 4 seconds)Waiting: 3 seconds)Waiting: 2 seconds)Waiting: 1 seconds)Waiting: 0 seconds)#command : bash bash/db-data.sh --host=172.31.2.159 --db=tps1
+#command : bash bash/jmeter-first-send.sh --dir=test/1699922284153/subtest/1699924435720/create-accounts/test-result
+#command : bash bash/db-last-confirmed.sh --host=172.31.2.159 --db=tps1
+New accounts: 30000
+Duration: 9 seconds
+Type = account / Total Load = 31000 / Items Count = 3000 / RampUp Period = 5
+[37m2023-11-14T01:16:10.107Z: [39m[33mbash bash/run-jmeter.sh --data=1699922284153 --dir=subtest/1699924521262/create-accounts --period=5[39m
+[37m2023-11-14T01:16:10.110Z: [39m[33mExit create-operation.sh[39m
+Waiting: 30 seconds)Waiting: 29 seconds)Waiting: 28 seconds)Waiting: 27 seconds)Waiting: 26 seconds)Waiting: 25 seconds)Waiting: 24 seconds)Waiting: 23 seconds)Waiting: 22 seconds)Waiting: 21 seconds)Waiting: 20 seconds)Waiting: 19 seconds)Waiting: 18 seconds)Waiting: 17 seconds)Waiting: 16 seconds)Waiting: 15 seconds)Waiting: 14 seconds)Waiting: 13 seconds)Waiting: 12 seconds)Waiting: 11 seconds)Waiting: 10 seconds)Waiting: 9 seconds)Waiting: 8 seconds)Waiting: 7 seconds)Waiting: 6 seconds)Waiting: 5 seconds)Waiting: 4 seconds)Waiting: 3 seconds)Waiting: 2 seconds)Waiting: 1 seconds)Waiting: 0 seconds)#command : bash bash/db-data.sh --host=172.31.2.159 --db=tps1
+#command : bash bash/jmeter-first-send.sh --dir=test/1699922284153/subtest/1699924521262/create-accounts/test-result
+#command : bash bash/db-last-confirmed.sh --host=172.31.2.159 --db=tps1
+New accounts: 31000
+Duration: 14 seconds
+Type = account / Total Load = 33000 / Items Count = 3000 / RampUp Period = 5
+[37m2023-11-14T01:17:42.418Z: [39m[33mbash bash/run-jmeter.sh --data=1699922284153 --dir=subtest/1699924609128/create-accounts --period=5[39m
+[37m2023-11-14T01:17:42.421Z: [39m[33mExit create-operation.sh[39m
+Waiting: 30 seconds)Waiting: 29 seconds)Waiting: 28 seconds)Waiting: 27 seconds)Waiting: 26 seconds)Waiting: 25 seconds)Waiting: 24 seconds)Waiting: 23 seconds)Waiting: 22 seconds)Waiting: 21 seconds)Waiting: 20 seconds)Waiting: 19 seconds)Waiting: 18 seconds)Waiting: 17 seconds)Waiting: 16 seconds)Waiting: 15 seconds)Waiting: 14 seconds)Waiting: 13 seconds)Waiting: 12 seconds)Waiting: 11 seconds)Waiting: 10 seconds)Waiting: 9 seconds)Waiting: 8 seconds)Waiting: 7 seconds)Waiting: 6 seconds)Waiting: 5 seconds)Waiting: 4 seconds)Waiting: 3 seconds)Waiting: 2 seconds)Waiting: 1 seconds)Waiting: 0 seconds)#command : bash bash/db-data.sh --host=172.31.2.159 --db=tps1
+#command : bash bash/jmeter-first-send.sh --dir=test/1699922284153/subtest/1699924609128/create-accounts/test-result
+#command : bash bash/db-last-confirmed.sh --host=172.31.2.159 --db=tps1
+New accounts: 33000
+Duration: 11 seconds
+Type = account / Total Load = 35000 / Items Count = 3000 / RampUp Period = 5
+[37m2023-11-14T01:19:18.672Z: [39m[33mbash bash/run-jmeter.sh --data=1699922284153 --dir=subtest/1699924701581/create-accounts --period=5[39m
+[37m2023-11-14T01:19:18.676Z: [39m[33mExit create-operation.sh[39m
+Waiting: 30 seconds)Waiting: 29 seconds)Waiting: 28 seconds)Waiting: 27 seconds)Waiting: 26 seconds)Waiting: 25 seconds)Waiting: 24 seconds)Waiting: 23 seconds)Waiting: 22 seconds)Waiting: 21 seconds)Waiting: 20 seconds)Waiting: 19 seconds)Waiting: 18 seconds)Waiting: 17 seconds)Waiting: 16 seconds)Waiting: 15 seconds)Waiting: 14 seconds)Waiting: 13 seconds)Waiting: 12 seconds)Waiting: 11 seconds)Waiting: 10 seconds)Waiting: 9 seconds)Waiting: 8 seconds)Waiting: 7 seconds)Waiting: 6 seconds)Waiting: 5 seconds)Waiting: 4 seconds)Waiting: 3 seconds)Waiting: 2 seconds)Waiting: 1 seconds)Waiting: 0 seconds)#command : bash bash/db-data.sh --host=172.31.2.159 --db=tps1
+#command : bash bash/jmeter-first-send.sh --dir=test/1699922284153/subtest/1699924701581/create-accounts/test-result
+#command : bash bash/db-last-confirmed.sh --host=172.31.2.159 --db=tps1
+New accounts: 35000
+Duration: 9 seconds
+Type = account / Total Load = 37000 / Items Count = 3000 / RampUp Period = 5
+[37m2023-11-14T01:20:57.618Z: [39m[33mbash bash/run-jmeter.sh --data=1699922284153 --dir=subtest/1699924797852/create-accounts --period=5[39m
+[37m2023-11-14T01:20:57.622Z: [39m[33mExit create-operation.sh[39m
+Waiting: 30 seconds)Waiting: 29 seconds)Waiting: 28 seconds)Waiting: 27 seconds)Waiting: 26 seconds)Waiting: 25 seconds)Waiting: 24 seconds)Waiting: 23 seconds)Waiting: 22 seconds)Waiting: 21 seconds)Waiting: 20 seconds)Waiting: 19 seconds)Waiting: 18 seconds)Waiting: 17 seconds)Waiting: 16 seconds)Waiting: 15 seconds)Waiting: 14 seconds)Waiting: 13 seconds)Waiting: 12 seconds)Waiting: 11 seconds)Waiting: 10 seconds)Waiting: 9 seconds)Waiting: 8 seconds)Waiting: 7 seconds)Waiting: 6 seconds)Waiting: 5 seconds)Waiting: 4 seconds)Waiting: 3 seconds)Waiting: 2 seconds)Waiting: 1 seconds)Waiting: 0 seconds)#command : bash bash/db-data.sh --host=172.31.2.159 --db=tps1
+#command : bash bash/jmeter-first-send.sh --dir=test/1699922284153/subtest/1699924797852/create-accounts/test-result
+#command : bash bash/db-last-confirmed.sh --host=172.31.2.159 --db=tps1
+New accounts: 37000
+Duration: 15 seconds
+Type = account / Total Load = 39000 / Items Count = 3000 / RampUp Period = 5
+[37m2023-11-14T01:22:39.129Z: [39m[33mbash bash/run-jmeter.sh --data=1699922284153 --dir=subtest/1699924896890/create-accounts --period=5[39m
+[37m2023-11-14T01:22:39.132Z: [39m[33mExit create-operation.sh[39m
+Waiting: 30 seconds)Waiting: 29 seconds)Waiting: 28 seconds)Waiting: 27 seconds)Waiting: 26 seconds)Waiting: 25 seconds)Waiting: 24 seconds)Waiting: 23 seconds)Waiting: 22 seconds)Waiting: 21 seconds)Waiting: 20 seconds)Waiting: 19 seconds)Waiting: 18 seconds)Waiting: 17 seconds)Waiting: 16 seconds)Waiting: 15 seconds)Waiting: 14 seconds)Waiting: 13 seconds)Waiting: 12 seconds)Waiting: 11 seconds)Waiting: 10 seconds)Waiting: 9 seconds)Waiting: 8 seconds)Waiting: 7 seconds)Waiting: 6 seconds)Waiting: 5 seconds)Waiting: 4 seconds)Waiting: 3 seconds)Waiting: 2 seconds)Waiting: 1 seconds)Waiting: 0 seconds)#command : bash bash/db-data.sh --host=172.31.2.159 --db=tps1
+#command : bash bash/jmeter-first-send.sh --dir=test/1699922284153/subtest/1699924896890/create-accounts/test-result
+#command : bash bash/db-last-confirmed.sh --host=172.31.2.159 --db=tps1
+New accounts: 39000
+Duration: 17 seconds
+Type = account / Total Load = 40000 / Items Count = 3000 / RampUp Period = 5
+[37m2023-11-14T01:24:22.973Z: [39m[33mbash bash/run-jmeter.sh --data=1699922284153 --dir=subtest/1699924998469/create-accounts --period=5[39m
+[37m2023-11-14T01:24:22.977Z: [39m[33mExit create-operation.sh[39m
+Waiting: 30 seconds)Waiting: 29 seconds)Waiting: 28 seconds)Waiting: 27 seconds)Waiting: 26 seconds)Waiting: 25 seconds)Waiting: 24 seconds)Waiting: 23 seconds)Waiting: 22 seconds)Waiting: 21 seconds)Waiting: 20 seconds)Waiting: 19 seconds)Waiting: 18 seconds)Waiting: 17 seconds)Waiting: 16 seconds)Waiting: 15 seconds)Waiting: 14 seconds)Waiting: 13 seconds)Waiting: 12 seconds)Waiting: 11 seconds)Waiting: 10 seconds)Waiting: 9 seconds)Waiting: 8 seconds)Waiting: 7 seconds)Waiting: 6 seconds)Waiting: 5 seconds)Waiting: 4 seconds)Waiting: 3 seconds)Waiting: 2 seconds)Waiting: 1 seconds)Waiting: 0 seconds)#command : bash bash/db-data.sh --host=172.31.2.159 --db=tps1
+#command : bash bash/jmeter-first-send.sh --dir=test/1699922284153/subtest/1699924998469/create-accounts/test-result
+#command : bash bash/db-last-confirmed.sh --host=172.31.2.159 --db=tps1
+New accounts: 40000
+Duration: 11 seconds
+Type = account / Total Load = 40000 / Items Count = 3000 / RampUp Period = 5
+[37m2023-11-14T01:57:07.063Z: [39m[33mbash bash/run-jmeter.sh --data=1699922284153 --dir=subtest/1699926963502/create-accounts --period=5[39m
+[37m2023-11-14T01:57:07.066Z: [39m[33mExit create-operation.sh[39m
+Waiting: 30 seconds)Waiting: 29 seconds)Waiting: 28 seconds)Waiting: 27 seconds)Waiting: 26 seconds)Waiting: 25 seconds)Waiting: 24 seconds)Waiting: 23 seconds)Waiting: 22 seconds)Waiting: 21 seconds)Waiting: 20 seconds)Waiting: 19 seconds)Waiting: 18 seconds)Waiting: 17 seconds)Waiting: 16 seconds)Waiting: 15 seconds)Waiting: 14 seconds)Waiting: 13 seconds)Waiting: 12 seconds)Waiting: 11 seconds)Waiting: 10 seconds)Waiting: 9 seconds)Waiting: 8 seconds)Waiting: 7 seconds)Waiting: 6 seconds)Waiting: 5 seconds)Waiting: 4 seconds)Waiting: 3 seconds)Waiting: 2 seconds)Waiting: 1 seconds)Waiting: 0 seconds)#command : bash bash/db-data.sh --host=172.31.2.159 --db=tps1
+#command : bash bash/jmeter-first-send.sh --dir=test/1699922284153/subtest/1699926963502/create-accounts/test-result
+#command : bash bash/db-last-confirmed.sh --host=172.31.2.159 --db=tps1
+New accounts: 40000
+Duration: 12 seconds
+Type = account / Total Load = 40000 / Items Count = 3000 / RampUp Period = 5
+[37m2023-11-14T01:58:50.710Z: [39m[33mbash bash/run-jmeter.sh --data=1699922284153 --dir=subtest/1699927066434/create-accounts --period=5[39m
+[37m2023-11-14T01:58:50.713Z: [39m[33mExit create-operation.sh[39m
+Waiting: 30 seconds)Waiting: 29 seconds)Waiting: 28 seconds)Waiting: 27 seconds)Waiting: 26 seconds)Waiting: 25 seconds)Waiting: 24 seconds)Waiting: 23 seconds)Waiting: 22 seconds)Waiting: 21 seconds)Waiting: 20 seconds)Waiting: 19 seconds)Waiting: 18 seconds)Waiting: 17 seconds)Waiting: 16 seconds)Waiting: 15 seconds)Waiting: 14 seconds)Waiting: 13 seconds)Waiting: 12 seconds)Waiting: 11 seconds)Waiting: 10 seconds)Waiting: 9 seconds)Waiting: 8 seconds)Waiting: 7 seconds)Waiting: 6 seconds)Waiting: 5 seconds)Waiting: 4 seconds)Waiting: 3 seconds)Waiting: 2 seconds)Waiting: 1 seconds)Waiting: 0 seconds)#command : bash bash/db-data.sh --host=172.31.2.159 --db=tps1
+#command : bash bash/jmeter-first-send.sh --dir=test/1699922284153/subtest/1699927066434/create-accounts/test-result
+#command : bash bash/db-last-confirmed.sh --host=172.31.2.159 --db=tps1
+New accounts: 40000
+Duration: 16 seconds
+Type = account / Total Load = 40000 / Items Count = 3000 / RampUp Period = 5
+[37m2023-11-14T02:00:34.705Z: [39m[33mbash bash/run-jmeter.sh --data=1699922284153 --dir=subtest/1699927170203/create-accounts --period=5[39m
+[37m2023-11-14T02:00:34.709Z: [39m[33mExit create-operation.sh[39m
+Waiting: 30 seconds)Waiting: 29 seconds)Waiting: 28 seconds)Waiting: 27 seconds)Waiting: 26 seconds)Waiting: 25 seconds)Waiting: 24 seconds)Waiting: 23 seconds)Waiting: 22 seconds)Waiting: 21 seconds)Waiting: 20 seconds)Waiting: 19 seconds)Waiting: 18 seconds)Waiting: 17 seconds)Waiting: 16 seconds)Waiting: 15 seconds)Waiting: 14 seconds)Waiting: 13 seconds)Waiting: 12 seconds)Waiting: 11 seconds)Waiting: 10 seconds)Waiting: 9 seconds)Waiting: 8 seconds)Waiting: 7 seconds)Waiting: 6 seconds)Waiting: 5 seconds)Waiting: 4 seconds)Waiting: 3 seconds)Waiting: 2 seconds)Waiting: 1 seconds)Waiting: 0 seconds)#command : bash bash/db-data.sh --host=172.31.2.159 --db=tps1
+#command : bash bash/jmeter-first-send.sh --dir=test/1699922284153/subtest/1699927170203/create-accounts/test-result
+#command : bash bash/db-last-confirmed.sh --host=172.31.2.159 --db=tps1
+New accounts: 40000
+Duration: 15 seconds
+Type = account / Total Load = 40000 / Items Count = 3000 / RampUp Period = 5
+[37m2023-11-14T02:02:18.994Z: [39m[33mbash bash/run-jmeter.sh --data=1699922284153 --dir=subtest/1699927274178/create-accounts --period=5[39m
+[37m2023-11-14T02:02:18.998Z: [39m[33mExit create-operation.sh[39m
+Waiting: 30 seconds)Waiting: 29 seconds)Waiting: 28 seconds)Waiting: 27 seconds)Waiting: 26 seconds)Waiting: 25 seconds)Waiting: 24 seconds)Waiting: 23 seconds)Waiting: 22 seconds)Waiting: 21 seconds)Waiting: 20 seconds)Waiting: 19 seconds)Waiting: 18 seconds)Waiting: 17 seconds)Waiting: 16 seconds)Waiting: 15 seconds)Waiting: 14 seconds)Waiting: 13 seconds)Waiting: 12 seconds)Waiting: 11 seconds)Waiting: 10 seconds)Waiting: 9 seconds)Waiting: 8 seconds)Waiting: 7 seconds)Waiting: 6 seconds)Waiting: 5 seconds)Waiting: 4 seconds)Waiting: 3 seconds)Waiting: 2 seconds)Waiting: 1 seconds)Waiting: 0 seconds)#command : bash bash/db-data.sh --host=172.31.2.159 --db=tps1
+#command : bash bash/jmeter-first-send.sh --dir=test/1699922284153/subtest/1699927274178/create-accounts/test-result
+#command : bash bash/db-last-confirmed.sh --host=172.31.2.159 --db=tps1
+New accounts: 40000
+Duration: 13 seconds
+Type = account / Total Load = 40000 / Items Count = 3000 / RampUp Period = 5
+[37m2023-11-14T02:04:03.477Z: [39m[33mbash bash/run-jmeter.sh --data=1699922284153 --dir=subtest/1699927378578/create-accounts --period=5[39m
+[37m2023-11-14T02:04:03.481Z: [39m[33mExit create-operation.sh[39m
+Waiting: 30 seconds)Waiting: 29 seconds)Waiting: 28 seconds)Waiting: 27 seconds)Waiting: 26 seconds)Waiting: 25 seconds)Waiting: 24 seconds)Waiting: 23 seconds)Waiting: 22 seconds)Waiting: 21 seconds)Waiting: 20 seconds)Waiting: 19 seconds)Waiting: 18 seconds)Waiting: 17 seconds)Waiting: 16 seconds)Waiting: 15 seconds)Waiting: 14 seconds)Waiting: 13 seconds)Waiting: 12 seconds)Waiting: 11 seconds)Waiting: 10 seconds)Waiting: 9 seconds)Waiting: 8 seconds)Waiting: 7 seconds)Waiting: 6 seconds)Waiting: 5 seconds)Waiting: 4 seconds)Waiting: 3 seconds)Waiting: 2 seconds)Waiting: 1 seconds)Waiting: 0 seconds)#command : bash bash/db-data.sh --host=172.31.2.159 --db=tps1
+#command : bash bash/jmeter-first-send.sh --dir=test/1699922284153/subtest/1699927378578/create-accounts/test-result
+#command : bash bash/db-last-confirmed.sh --host=172.31.2.159 --db=tps1
+New accounts: 40000
+Duration: 17 seconds
+Type = account / Total Load = 40000 / Items Count = 3000 / RampUp Period = 5
+[37m2023-11-14T02:05:47.177Z: [39m[33mbash bash/run-jmeter.sh --data=1699922284153 --dir=subtest/1699927483050/create-accounts --period=5[39m
+[37m2023-11-14T02:05:47.180Z: [39m[33mExit create-operation.sh[39m
+Waiting: 30 seconds)Waiting: 29 seconds)Waiting: 28 seconds)Waiting: 27 seconds)Waiting: 26 seconds)Waiting: 25 seconds)Waiting: 24 seconds)Waiting: 23 seconds)Waiting: 22 seconds)Waiting: 21 seconds)Waiting: 20 seconds)Waiting: 19 seconds)Waiting: 18 seconds)Waiting: 17 seconds)Waiting: 16 seconds)Waiting: 15 seconds)Waiting: 14 seconds)Waiting: 13 seconds)Waiting: 12 seconds)Waiting: 11 seconds)Waiting: 10 seconds)Waiting: 9 seconds)Waiting: 8 seconds)Waiting: 7 seconds)Waiting: 6 seconds)Waiting: 5 seconds)Waiting: 4 seconds)Waiting: 3 seconds)Waiting: 2 seconds)Waiting: 1 seconds)Waiting: 0 seconds)#command : bash bash/db-data.sh --host=172.31.2.159 --db=tps1
+#command : bash bash/jmeter-first-send.sh --dir=test/1699922284153/subtest/1699927483050/create-accounts/test-result
+#command : bash bash/db-last-confirmed.sh --host=172.31.2.159 --db=tps1
+New accounts: 40000
+Duration: 16 seconds
+Type = account / Total Load = 40000 / Items Count = 3000 / RampUp Period = 5
+[37m2023-11-14T02:07:31.091Z: [39m[33mbash bash/run-jmeter.sh --data=1699922284153 --dir=subtest/1699927586811/create-accounts --period=5[39m
+[37m2023-11-14T02:07:31.094Z: [39m[33mExit create-operation.sh[39m
+Waiting: 30 seconds)Waiting: 29 seconds)Waiting: 28 seconds)Waiting: 27 seconds)Waiting: 26 seconds)Waiting: 25 seconds)Waiting: 24 seconds)Waiting: 23 seconds)Waiting: 22 seconds)Waiting: 21 seconds)Waiting: 20 seconds)Waiting: 19 seconds)Waiting: 18 seconds)Waiting: 17 seconds)Waiting: 16 seconds)Waiting: 15 seconds)Waiting: 14 seconds)Waiting: 13 seconds)Waiting: 12 seconds)Waiting: 11 seconds)Waiting: 10 seconds)Waiting: 9 seconds)Waiting: 8 seconds)Waiting: 7 seconds)Waiting: 6 seconds)Waiting: 5 seconds)Waiting: 4 seconds)Waiting: 3 seconds)Waiting: 2 seconds)Waiting: 1 seconds)Waiting: 0 seconds)#command : bash bash/db-data.sh --host=172.31.2.159 --db=tps1
+#command : bash bash/jmeter-first-send.sh --dir=test/1699922284153/subtest/1699927586811/create-accounts/test-result
+#command : bash bash/db-last-confirmed.sh --host=172.31.2.159 --db=tps1
+New accounts: 40000
+Duration: 16 seconds

@@ -36,6 +36,8 @@ if [ -z "$OPERATION_DIR" ]; then
   exit 1
 fi
 
+echo \"RAMP: $RAMP_UP_PERIOD\"
+
 # variables
 MODE="api"
 NETWORK_ID=mitum

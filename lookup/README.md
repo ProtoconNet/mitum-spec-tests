@@ -33,3 +33,8 @@ Then run the script.
 ```sh
 $ `JVM_ARGS="-Xms{heap_size} -Xmx{heap_size}"` jmeter -n -t lookup.jmx -l result.jtl -j jmeter.log
 ```
+or
+
+```sh
+$ jmeter -n -t lookup_account.jmx -l results.jtl -e -o ./account_test_trial1
+```
