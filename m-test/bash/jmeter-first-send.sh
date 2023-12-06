@@ -23,7 +23,8 @@ if [ -z "$DIR" ]; then
 fi
 
 timestamp=$(sed -n '2p' "$DIR/result.jtl" | cut -d',' -f1)
-seconds=$((timestamp/1000))
-milliseconds=$((timestamp%1000))
-date_string=$(date -u -r $seconds '+%Y-%m-%dT%H:%M:%S')
-echo "${date_string}.${milliseconds}Z"
+#seconds=$((timestamp/1000))
+#milliseconds=$((timestamp%1000))
+#date_string=$(date -u -d @$seconds '+%Y-%m-%dT%H:%M:%S')
+#echo "${date_string}.${milliseconds}Z"
+echo "$timestamp"

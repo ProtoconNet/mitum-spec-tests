@@ -59,7 +59,11 @@ export function createAccounts({
 			try {
 				kp = mitum.account.key();
 			} catch (err) {
-				continue
+				try {
+                                	kp = mitum.account.key();
+				} catch (err) {
+                                	continue;
+                        	}	
 			}
 			const keys = new Keys(
 				[new PubKey(kp.publickey, 100)],
@@ -104,7 +108,7 @@ export function createAccounts({
 	log(`bash bash/run-jmeter.sh --data=${timestamp} --dir=${subDir}/create-accounts --period=${rampup}`);
 
 	const subprocess = spawn('bash',
-		['bash/run-jmeter.sh', `--data=${timestamp}`, `--dir=${subDir}/create-accounts`, ` --period=${rampup}`],
+		['bash/run-jmeter.sh', `--data=${timestamp}`, `--dir=${subDir}/create-accounts`, `--period=${rampup}`],
 		{ detached: false, stdio: 'inherit' });
 	log("Exit create-operation.sh")
 }

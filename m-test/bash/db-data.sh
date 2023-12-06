@@ -23,11 +23,11 @@ done
 
 # check empty values
 if [ -z "$HOST" ]; then
-  echo -e "\033[0;33m  Error: empty accounts data directory. set with --host= \033[0m"
+  echo -e "\033[0;33m  Error: empty host. set with --host= \033[0m"
   exit 1
 fi
 if [ -z "$DATABASE" ]; then
-  echo -e "\033[0;33m  Error: empty accounts data directory. set with --db= \033[0m"
+  echo -e "\033[0;33m  Error: empty database. set with --db= \033[0m"
   exit 1
 fi
 

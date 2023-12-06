@@ -5,5 +5,8 @@ const dbConnection = db.getSiblingDB(dbName);
 const result = dbConnection.getCollection(collectionName).find({}, {'d.confirmed_at': 1, _id: 0}).sort({$natural: -1}).limit(1).toArray();
 
 if (result.length > 0 && result[0].d && result[0].d.confirmed_at) {
-    print(result[0].d.confirmed_at.toISOString());
+    //print(result[0].d.confirmed_at.toISOString());
+    const dateString = result[0].d.confirmed_at.toISOString();
+    const dateObject = new Date(dateString);
+    print(dateObject.getTime());
 }

@@ -58,7 +58,9 @@ async function pause(duration) {
 function test({ operationDIR, mode, timestamp, apiEndpoints, networkID, rampUpPeriod, n, mongo, db }) {
 	ensureDirSync(`${operationDIR}/test-result/`);
 	const baseDir = `test/${timestamp}`
-	const api = JSON.parse(readFileSync(`${baseDir}/setup/api.json`, { encoding: "utf8" }));
+	console.log(apiEndpoints)
+	console.log(`ramp time : ${rampUpPeriod}`);
+	// const api = JSON.parse(readFileSync(`${baseDir}/setup/api.json`, { encoding: "utf8" }));
 	// log(`dir ${operationDIR}/test-result/ created`);
 
 	if (mode === "api") {
@@ -197,27 +199,29 @@ function test({ operationDIR, mode, timestamp, apiEndpoints, networkID, rampUpPe
 Before=$(echo "$Out" | awk 'NR==2 {print $NF}')
 # echo \"Before account : $Before\"
 JVM_ARGS="-Xms32g -Xmx32g" jmeter -Jlog_level.jmeter=FATAL_ERROR -Jlog_level.jorphan=FATAL_ERROR -n -t ${operationDIR}/test-result/test.jmx -l ${operationDIR}/test-result/result.jtl -j ${operationDIR}/test-result/jmeter.log > /dev/null 2>&1
-count=10
+count=78
 while [ $count -ge 0 ]; do
     echo -ne "Waiting: $count seconds)\\r"
     ((count--))
     sleep 1
 done
-# echo \"#command : bash bash/db-data.sh --host=${mongo} --db=${db}\"
+echo \"#command : bash bash/db-data.sh --host=${mongo} --db=${db}\"
 Out=$(bash bash/db-data.sh --host=${mongo} --db=${db})
 After=$(echo "$Out" | awk 'NR==2 {print $NF}')
 # echo \"After account : $After\"
-# echo \"#command : bash bash/jmeter-first-send.sh --dir=${operationDIR}/test-result\"
+echo \"#command : bash bash/jmeter-first-send.sh --dir=${operationDIR}/test-result\"
 DATE1=$(bash bash/jmeter-first-send.sh --dir=${operationDIR}/test-result)
-# echo \"#command : bash bash/db-last-confirmed.sh --host=${mongo} --db=${db}\"
-DATE2=$(bash bash/db-last-confirmed.sh --host=${mongo} --db=${db})
-DATE1_formatted=$(echo $DATE1 | sed 's/\\.[0-9]\\{3\\}Z//')
-DATE2_formatted=$(echo $DATE2 | sed 's/\\.[0-9]\\{3\\}Z//')
-ts1=$(date -j -f "%Y-%m-%dT%H:%M:%S" "$DATE1_formatted" +%s)
-ts2=$(date -j -f "%Y-%m-%dT%H:%M:%S" "$DATE2_formatted" +%s)
-difference=$((ts2 - ts1))
+echo \"#command : bash bash/db-last-confirmed.sh --host=${mongo} --db=${db}\"
+DATE2_=$(bash bash/db-last-confirmed.sh --host=${mongo} --db=${db})
+DATE2=$(date -d "$Date2" +"%s%3N")
+echo \" first request time: $DATE1\"
+echo \"last confirmed time: $DATE2\"
+#ts1=$(date -d "$DATE1" +%s)
+#ts2=$(date -d "$DATE2" +%s)
+difference=$((DATE2 - DATE1))
+tps=$(( ( (After-Before) * 1000 ) / difference))
 echo \"New accounts: $((After-Before))\"
-echo \"Duration: $difference seconds\"
+echo \"TPS: $tps\"
 `
 		);
 

@@ -31,7 +31,7 @@ async function createAccount({
 	maxItems,
 	genesis,
 	accN,
-    contractN,
+        contractN,
 	interval,
 	baseDir,
 }) {
@@ -113,7 +113,7 @@ async function createAccount({
 					.post(`${apiUrl}`, d)
 					.then((_) => success(`phase ${count}:: OK; ${d.fact.hash}`))
 					.catch((_) => warning(`phase ${count}:: BAD; ${d.fact.hash}`));
-				await wait(1000);
+				await wait(2000);
 			} else if (mode === "network-client") {
 				// 	TODO
 			}
@@ -340,7 +340,7 @@ async function run() {
 	const args = process.argv.map((val) => val);
 	assert(args.length === 13)
 	const mode = args[2];
-	const endpoint = args[3];
+	const endpoints = args[3];
 	const networkID = args[4];
 	const cid = args[5];
 	const maxItems = args[6];
@@ -353,7 +353,8 @@ async function run() {
 
 	const timestamp = new Date().getTime();
 	const baseDir = `test/${timestamp}/setup`
-	apiUrl = `${endpoint}/builder/send/queue`
+	const urls = endpoints.split(",").filter((net) => net !== "");
+	apiUrl = `${urls[0]}/builder/send/queue`
 	console.log(apiUrl)
 	const arg = {
 		mode,
@@ -390,7 +391,7 @@ async function run() {
 	writeFileSync(
 		`${baseDir}/api.json`,
 		JSON.stringify({
-			url : `${endpoint}`,
+			url : `${endpoints}`,
 			mongo : `${mongo}`,
 			db : `${db}`,
 		}, null, 4)
