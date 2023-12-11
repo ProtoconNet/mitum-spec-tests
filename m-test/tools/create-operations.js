@@ -188,10 +188,10 @@ export function createCredentials({
 		testOperations.map((op) => op.fact.hash).join("\n")
 	);
 	// log(`${baseDir}/${subDir}/assign-credential/facts.csv created`);
-	log(`bash bash/run-jmeter.sh --data=${timestamp} --dir=${subDir}/assign-credential  --period=${rampup}`)
+	log(`bash bash/run-jmeter2.sh --data=${timestamp} --dir=${subDir}/assign-credential  --period=${rampup}`)
 
 	const subprocess = spawn('bash',
-		['bash/run-jmeter.sh', `--data=${timestamp}`, `--dir=${subDir}/create-accounts`, `--period=${rampup}`],
+		['bash/run-jmeter2.sh', `--data=${timestamp}`, `--dir=${subDir}/assign-credential`, `--period=${rampup}`],
 		{ detached: false, stdio: 'inherit' });
 	log("Exit create-operation.sh")
 }
