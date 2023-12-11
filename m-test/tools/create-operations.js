@@ -191,7 +191,7 @@ export function createCredentials({
 	log(`bash bash/run-jmeter.sh --data=${timestamp} --dir=${subDir}/assign-credential  --period=${rampup}`)
 
 	const subprocess = spawn('bash',
-		['bash/run-jmeter.sh', `--data=${timestamp}`, `--dir=${subDir}/create-accounts`, `--period=${rampup}`],
+		['bash/run-jmeter.sh', `--data=${timestamp}`, `--dir=${subDir}/assign-credential`, `--period=${rampup}`],
 		{ detached: false, stdio: 'inherit' });
 	log("Exit create-operation.sh")
 }
