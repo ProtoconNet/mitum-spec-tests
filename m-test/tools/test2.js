@@ -212,8 +212,7 @@ After=$(echo "$Out" | awk 'NR==5 {print $NF}')
 echo \"#command : bash bash/jmeter-first-send.sh --dir=${operationDIR}/test-result\"
 DATE1=$(bash bash/jmeter-first-send.sh --dir=${operationDIR}/test-result)
 echo \"#command : bash bash/db-last-confirmed.sh --host=${mongo} --db=${db}\"
-DATE2_=$(bash bash/db-last-confirmed.sh --host=${mongo} --db=${db})
-DATE2=$(date -d "$Date2" +"%s%3N")
+DATE2=$(bash bash/db-last-confirmed.sh --host=${mongo} --db=${db})
 echo \" first request time: $DATE1\"
 echo \"last confirmed time: $DATE2\"
 #ts1=$(date -d "$DATE1" +%s)
